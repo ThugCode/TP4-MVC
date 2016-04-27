@@ -1,4 +1,4 @@
-package logoInit;
+package vue;
 
 // package logo;
 
@@ -26,13 +26,6 @@ public class FeuilleDessin extends JPanel {
 
 	public void addTortue(Tortue o) {
 		tortues.add(o);
-	}
-
-	public void reset() {
-		for (Iterator it = tortues.iterator();it.hasNext();) {
-			Tortue t = (Tortue) it.next();
-			t.reset();
-		}
 	}
 
 	public void paintComponent(Graphics g) {

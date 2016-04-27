@@ -1,4 +1,4 @@
-package logoInit;
+package vue;
 
 
 // package logo;
