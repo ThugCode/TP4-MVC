@@ -18,13 +18,13 @@ import java.io.*;
  */
 
 public class FeuilleDessin extends JPanel {
-	private ArrayList<Tortue> tortues; // la liste des tortues enregistrees
+	private ArrayList<TortueVue> tortues; // la liste des tortues enregistrees
 	
 	public FeuilleDessin() {
-		tortues = new ArrayList<Tortue>();
+		tortues = new ArrayList<TortueVue>();
 	}
 
-	public void addTortue(Tortue o) {
+	public void addTortue(TortueVue o) {
 		tortues.add(o);
 	}
 
@@ -43,7 +43,7 @@ public class FeuilleDessin extends JPanel {
 	
 	public void showTurtles(Graphics g) {
 		for(Iterator it = tortues.iterator();it.hasNext();) {
-			Tortue t = (Tortue) it.next();
+			TortueVue t = (TortueVue) it.next();
 			t.drawTurtle(g);
 		}
 	}

@@ -2,8 +2,9 @@ package modele;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Tortue {
+public class Tortue extends Observable {
 
 	protected static final int rp=10, rb=5; // Taille de la pointe et de la base de la fleche
 	protected static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)

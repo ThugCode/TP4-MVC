@@ -32,7 +32,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	public static final Dimension HGAP = new Dimension(5,1);
 
 	private FeuilleDessin feuille;
-	private Tortue courante;
+	private TortueVue courante;
 	private JTextField inputValue;
 
 
@@ -154,7 +154,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		getContentPane().add(feuille,"Center");
 		
 		// Creation de la tortue
-		Tortue tortue = new Tortue();
+		TortueVue tortue = new TortueVue();
 		
 		// Deplacement de la tortue au centre de la feuille
 		tortue.setPosition(500/2, 400/2); 		

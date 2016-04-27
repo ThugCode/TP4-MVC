@@ -23,8 +23,8 @@ import java.io.*;
 **************************************************************************/
 
 
-public class Tortue
-{
+public class TortueVue implements Observer
+{	
 	public void drawTurtle (Graphics graph) {
 		if (graph==null)
 			return;
@@ -64,4 +64,10 @@ public class Tortue
 		graph.setColor(Color.green);
 		graph.fillPolygon(arrow);
     }
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
 }
