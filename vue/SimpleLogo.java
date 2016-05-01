@@ -7,6 +7,11 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import modele.Commun;
+import modele.Dessin;
+import modele.Logo;
+import modele.Tortue;
+
 import java.awt.event.*;
 import java.util.*;
 import java.io.*;
@@ -28,34 +33,17 @@ import java.io.*;
 
 
 public class SimpleLogo extends JFrame implements ActionListener {
-	public static final Dimension VGAP = new Dimension(1,5);
-	public static final Dimension HGAP = new Dimension(5,1);
-
-	private FeuilleDessin feuille;
-	private TortueVue courante;
+	
+	private Logo logo;
+	private Dessin feuille;
+	private Tortue courante;
 	private JTextField inputValue;
 
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		   SwingUtilities.invokeLater(new Runnable(){
-				public void run(){
-
-					SimpleLogo fenetre = new SimpleLogo();
-					fenetre.setVisible(true);
-				}
-			});
-			
-		}
-	
-	private void quitter() {
-		System.exit(0);
-	}
-
-	public SimpleLogo() {
+	public SimpleLogo(Logo p_logo) {
 		super("un logo tout simple");
+		
+		logo = p_logo;
+		
 		logoInit();
 		
 		addWindowListener(new WindowAdapter() {
@@ -67,6 +55,10 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		});
 	}
 
+	private void quitter() {
+		System.exit(0);
+	}
+	
 	public void logoInit() {
 		getContentPane().setLayout(new BorderLayout(10,10));
 
@@ -79,7 +71,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 
 		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
 		
-		toolBar.add(Box.createRigidArea(HGAP));
+		toolBar.add(Box.createRigidArea(Commun.HGAP));
 		inputValue=new JTextField("45",5);
 		toolBar.add(inputValue);
 		addButton(toolBar, "Avancer", "Avancer 50", null);
@@ -93,7 +85,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 								 "gris", "rose", "jaune"};
 
 		// Create the combo box
-		toolBar.add(Box.createRigidArea(HGAP));
+		toolBar.add(Box.createRigidArea(Commun.HGAP));
 		JLabel colorLabel = new JLabel("   Couleur: ");
 		toolBar.add(colorLabel);
 		JComboBox colorList = new JComboBox(colorStrings);
@@ -146,15 +138,17 @@ public class SimpleLogo extends JFrame implements ActionListener {
 
 		getContentPane().add(p2,"South");
 
-		feuille = new FeuilleDessin(); //500, 400);
-		feuille.setBackground(Color.white);
-		feuille.setSize(new Dimension(600,400));
-		feuille.setPreferredSize(new Dimension(600,400));
+		feuille = new Dessin();
+		FeuilleDessin feuilleVue = new FeuilleDessin(feuille); //500, 400);
+		feuilleVue.setBackground(Color.white);
+		feuilleVue.setSize(new Dimension(600,400));
+		feuilleVue.setPreferredSize(new Dimension(600,400));
 			
-		getContentPane().add(feuille,"Center");
+		getContentPane().add(feuilleVue,"Center");
 		
 		// Creation de la tortue
-		TortueVue tortue = new TortueVue();
+		Tortue tortue = new Tortue();
+		TortueVue tortueVue = new TortueVue(tortue);
 		
 		// Deplacement de la tortue au centre de la feuille
 		tortue.setPosition(500/2, 400/2); 		
@@ -219,7 +213,7 @@ public class SimpleLogo extends JFrame implements ActionListener {
 		else if (c.equals("Quitter"))
 			quitter();
 
-		feuille.repaint();
+		feuille.notifyObservers();
 	}
 
   	/** les procedures Logo qui combine plusieurs commandes..*/
@@ -238,10 +232,9 @@ public class SimpleLogo extends JFrame implements ActionListener {
 	// efface tout et reinitialise la feuille
 	public void effacer() {
 		feuille.reset();
-		feuille.repaint();
 
 		// Replace la tortue au centre
-		Dimension size = feuille.getSize();
+		Dimension size = new Dimension(600, 400);
 		courante.setPosition(size.width/2, size.height/2);
 	}
 

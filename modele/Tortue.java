@@ -4,20 +4,20 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 
+/**
+ * 
+ * @author GERLAND - LETOURNEUR
+ *
+ */
 public class Tortue extends Observable {
 
-	protected static final int rp=10, rb=5; // Taille de la pointe et de la base de la fleche
-	protected static final double ratioDegRad = 0.0174533; // Rapport radians/degres (pour la conversion)
-	
-	protected ArrayList<Segment> listSegments; // Trace de la tortue
-	
+	// Trace de la tortue
+	protected ArrayList<Segment> listSegments;
 	protected int x, y;	
 	protected int dir;	
 	protected boolean crayon; 
 	protected int coul;
 	
-	public void setColor(int n) {coul = n;}
-	public int getColor() {return coul;}
 
 	public Tortue() { 
 		listSegments = new ArrayList<Segment>();
@@ -31,11 +31,15 @@ public class Tortue extends Observable {
 		coul = 0;
 		crayon = true;
 		listSegments.clear();
+		setChanged();
+		notifyObservers();
   	}
 
 	public void setPosition(int newX, int newY) {
 		x = newX;
 		y = newY;
+		setChanged();
+		notifyObservers();
 	}
 	
 	protected Color decodeColor(int c) {
@@ -57,8 +61,8 @@ public class Tortue extends Observable {
 	}
 
 	public void avancer(int dist) {
-		int newX = (int) Math.round(x+dist*Math.cos(ratioDegRad*dir));
-		int newY = (int) Math.round(y+dist*Math.sin(ratioDegRad*dir));
+		int newX = (int) Math.round(x+dist*Math.cos(Commun.ratioDegRad*dir));
+		int newY = (int) Math.round(y+dist*Math.sin(Commun.ratioDegRad*dir));
 		
 		if (crayon==true) {
 			Segment seg = new Segment();
@@ -74,14 +78,20 @@ public class Tortue extends Observable {
 
 		x = newX;
 		y = newY;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void droite(int ang) {
 		dir = (dir + ang) % 360;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void gauche(int ang) {
 		dir = (dir - ang) % 360;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void baisserCrayon() {
@@ -107,6 +117,8 @@ public class Tortue extends Observable {
 			avancer(100);
 			droite(90);
 		}
+		setChanged();
+		notifyObservers();
 	}
 
 	public void poly(int n, int a) {
@@ -114,6 +126,8 @@ public class Tortue extends Observable {
 			avancer(n);
 			droite(360/a);
 		}
+		setChanged();
+		notifyObservers();
 	}
 
 	public void spiral(int n, int k, int a) {
@@ -123,5 +137,28 @@ public class Tortue extends Observable {
 			droite(360/a);
 			n = n+1;
 		}
+		setChanged();
+		notifyObservers();
 	}
+	
+	public ArrayList<Segment> getListSegments() {
+		return listSegments;
+	}
+
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public int getDir() {
+		return dir;
+	}
+	public int getColor() {return coul;}
+	public void setColor(int n) {
+		coul = n;
+		setChanged();
+		notifyObservers();
+	}
+	
 }

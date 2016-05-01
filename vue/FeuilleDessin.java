@@ -1,12 +1,12 @@
 package vue;
 
-// package logo;
-
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
+
+import modele.Dessin;
+import modele.Tortue;
+
 import java.util.*;
-import java.io.*;
 
 /**
  * Titre :        Logo
@@ -17,15 +17,14 @@ import java.io.*;
  * @version 2.0
  */
 
-public class FeuilleDessin extends JPanel {
-	private ArrayList<TortueVue> tortues; // la liste des tortues enregistrees
+public class FeuilleDessin extends JPanel implements Observer {
+	private static final long serialVersionUID = 1L;
 	
-	public FeuilleDessin() {
-		tortues = new ArrayList<TortueVue>();
-	}
-
-	public void addTortue(TortueVue o) {
-		tortues.add(o);
+	private Dessin dessin;
+	
+	public FeuilleDessin(Dessin p_dessin) {
+		dessin = p_dessin;
+		dessin.addObserver(this);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -42,9 +41,14 @@ public class FeuilleDessin extends JPanel {
 	}
 	
 	public void showTurtles(Graphics g) {
-		for(Iterator it = tortues.iterator();it.hasNext();) {
-			TortueVue t = (TortueVue) it.next();
-			t.drawTurtle(g);
+		for(Iterator<Tortue> it = dessin.getTortues().iterator();it.hasNext();) {
+			Tortue t = (Tortue) it.next();
+			t.notifyObservers();
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
 	}
 }
