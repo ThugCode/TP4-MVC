@@ -19,7 +19,6 @@ public class Tortue extends Observable {
 	protected boolean crayon; 
 	protected int coul;
 	
-
 	public Tortue() { 
 		listSegments = new ArrayList<Segment>();
 		reset();

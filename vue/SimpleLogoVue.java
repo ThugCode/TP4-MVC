@@ -39,11 +39,13 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	
 	private SimpleLogo logo;
 	private SimpleLogoControleur controleur;
-	public JTextField inputValue;
-	public JButton b20;
-	public JButton b21;
-	public JButton b22;
+	private JTextField inputValue;
 
+	/**
+	 * Controleur
+	 * @param p_logo
+	 * @param p_logoControleur
+	 */
 	public SimpleLogoVue(SimpleLogo p_logo, SimpleLogoControleur p_logoControleur) {
 		super("un logo tout simple");
 		
@@ -55,6 +57,9 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		logoInit();
 	}
 
+	/**
+	 * Constuction de la fenetre
+	 */
 	public void logoInit() {
 		getContentPane().setLayout(new BorderLayout(10,10));
 
@@ -85,16 +90,9 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		JLabel colorLabel = new JLabel("   Couleur: ");
 		toolBar.add(colorLabel);
 		JComboBox colorList = new JComboBox(colorStrings);
+		colorList.setActionCommand("Couleur");
+		colorList.addActionListener(controleur);
 		toolBar.add(colorList);
-
-		colorList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox cb = (JComboBox)e.getSource();
-				int n = cb.getSelectedIndex();
-				logo.getCourante().setColor(n);
-			}
-		});
-
 
 		// Menus
 		JMenuBar menubar=new JMenuBar();
@@ -122,18 +120,17 @@ public class SimpleLogoVue extends JFrame implements Observer {
 
 		// les boutons du bas
 		JPanel p2 = new JPanel(new GridLayout());
-		b20 = new JButton("Proc1");
+		JButton b20 = new JButton("Proc1");
+		b20.addActionListener(controleur);
 		p2.add(b20);
 		
-		b21 = new JButton("Proc2");
+		JButton b21 = new JButton("Proc2");
+		b21.addActionListener(controleur);
 		p2.add(b21);
 		
-		b22 = new JButton("Proc3");
-		p2.add(b22);
-		
-		b20.addActionListener(controleur);
-		b21.addActionListener(controleur);
+		JButton b22 = new JButton("Proc3");
 		b22.addActionListener(controleur);
+		p2.add(b22);
 
 		getContentPane().add(p2,"South");
 
@@ -145,7 +142,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		getContentPane().add(feuilleVue,"Center");
 		
 		// Creation de la tortue
-		TortueVue tortueVue = new TortueVue(logo.getCourante());
+		new TortueVue(logo.getCourante());
 		logo.getCourante().setPosition(510/2, 400/2);
 		logo.getDessin().addTortue(logo.getCourante());
 
@@ -153,12 +150,18 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		setVisible(true);
 	}
 
+	/**
+	 * Getter sur la valeur du champs input
+	 * @return String
+	 */
 	public String getInputValue(){
 		String s = inputValue.getText();
 		return(s);
 	}
-
-	// efface tout et reinitialise la feuille
+	
+	/**
+	 * Efface tout et reinitialise la feuille
+	 */
 	public void effacer() {
 		logo.getDessin().reset();
 
@@ -166,8 +169,14 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		Dimension size = new Dimension(600, 400);
 		logo.getCourante().setPosition(size.width/2, size.height/2);
 	}
-
-	//utilitaires pour installer des boutons et des menus
+	
+	/**
+	 * Utilitaires pour installer des boutons
+	 * @param p
+	 * @param name
+	 * @param tooltiptext
+	 * @param imageName
+	 */
 	public void addButton(JComponent p, String name, String tooltiptext, String imageName) {
 		JButton b;
 		if ((imageName == null) || (imageName.equals(""))) {
@@ -190,6 +199,13 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		b.addActionListener(controleur);
 	}
 
+	/**
+	 * Utilitaires pour installer des menus
+	 * @param m
+	 * @param label
+	 * @param command
+	 * @param key
+	 */
 	public void addMenuItem(JMenu m, String label, String command, int key) {
 		JMenuItem menuItem;
 		menuItem = new JMenuItem(label);
