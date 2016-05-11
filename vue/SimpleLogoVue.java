@@ -51,6 +51,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	 * @param p_logoControleur
 	 */
 	public SimpleLogoVue(SimpleLogo p_logo, SimpleLogoControleur p_logoControleur) {
+		
 		super("Un logo par GERLAND Loïc et LETOURNEUR Léo");
 		
 		controleur = p_logoControleur;
@@ -143,15 +144,12 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		getContentPane().add(p2,"South");
 
 		//FEUILLE
-		FeuilleDessinVue feuilleVue = new FeuilleDessinVue();
-		feuilleVue.setBackground(Color.red);
-		feuilleVue.setSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
-		feuilleVue.setPreferredSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
-			
-		getContentPane().add(feuilleVue,"Center");
+		logo.getDessin().setBackground(Color.red);
+		logo.getDessin().setSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
+		logo.getDessin().setPreferredSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
+		getContentPane().add(logo.getDessin(),"Center");
 		
 		//TORTUE
-		TortueVue tortueVue = new TortueVue(logo.getCTortue());
 		logo.getCTortue().setPosition(510/2, 400/2);
 		logo.getDessin().addTortue(logo.getCTortue());
 	}
