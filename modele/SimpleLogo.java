@@ -2,34 +2,34 @@ package modele;
 
 import java.util.Observable;
 
+import vue.FeuilleDessinVue;
+
 /**
- * 
  * @author GERLAND - LETOURNEUR
- *
  */
 public class SimpleLogo extends Observable {
 
-	private FeuilleDessin dessin;
-	private Tortue courante;
-
+	private Tortue cTortue;
+	private FeuilleDessinVue dessin;
+	
 	public SimpleLogo() {
-		dessin = new FeuilleDessin();
-		courante = new Tortue();
+		dessin = new FeuilleDessinVue();
+		cTortue = new Tortue();
 	}
 
-	public FeuilleDessin getDessin() {
+	public FeuilleDessinVue getDessin() {
 		return dessin;
 	}
 
-	public void setDessin(FeuilleDessin dessin) {
+	public void setDessin(FeuilleDessinVue dessin) {
 		this.dessin = dessin;
 	}
 
-	public Tortue getCourante() {
-		return courante;
+	public Tortue getCTortue() {
+		return cTortue;
 	}
 
-	public void setCourante(Tortue courante) {
-		this.courante = courante;
+	public void setCTortue(Tortue courante) {
+		this.cTortue = courante;
 	}
 }

@@ -8,8 +8,6 @@ import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,8 +28,8 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
+import commun.Commun;
 import controleur.SimpleLogoControleur;
-import modele.Commun;
 import modele.SimpleLogo;
 
 public class SimpleLogoVue extends JFrame implements Observer {
@@ -134,7 +132,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 
 		getContentPane().add(p2,"South");
 
-		FeuilleDessinVue feuilleVue = new FeuilleDessinVue(logo.getDessin()); //500, 400);
+		FeuilleDessinVue feuilleVue = new FeuilleDessinVue();
 		feuilleVue.setBackground(Color.white);
 		feuilleVue.setSize(new Dimension(600,400));
 		feuilleVue.setPreferredSize(new Dimension(600,400));
@@ -142,9 +140,9 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		getContentPane().add(feuilleVue,"Center");
 		
 		// Creation de la tortue
-		new TortueVue(logo.getCourante());
-		logo.getCourante().setPosition(510/2, 400/2);
-		logo.getDessin().addTortue(logo.getCourante());
+		new TortueVue(logo.getCTortue());
+		logo.getCTortue().setPosition(510/2, 400/2);
+		logo.getDessin().addTortue(logo.getCTortue());
 
 		pack();
 		setVisible(true);
@@ -167,7 +165,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 
 		// Replace la tortue au centre
 		Dimension size = new Dimension(600, 400);
-		logo.getCourante().setPosition(size.width/2, size.height/2);
+		logo.getCTortue().setPosition(size.width/2, size.height/2);
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package modele;
+package commun;
 
 import java.awt.Dimension;
 

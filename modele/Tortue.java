@@ -5,25 +5,30 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import commun.Commun;
+
 /**
- * 
  * @author GERLAND - LETOURNEUR
- *
  */
 public class Tortue extends Observable {
 
-	// Trace de la tortue
 	protected ArrayList<Segment> listSegments;
 	protected int x, y;	
 	protected int dir;	
 	protected boolean crayon; 
 	protected int coul;
 	
+	/**
+	 * Constructeur
+	 */
 	public Tortue() { 
 		listSegments = new ArrayList<Segment>();
 		reset();
 	}
 
+	/**
+	 * Réinitialiser la tortue
+	 */
 	public void reset() {
 		x = 0;
 		y = 0;
@@ -31,23 +36,44 @@ public class Tortue extends Observable {
 		coul = 0;
 		crayon = true;
 		listSegments.clear();
+		
+		notifier();
   	}
 	
+	/**
+	 * Notifier la vue avec un Graphics g
+	 * @param g
+	 */
 	public void notifier(Graphics g) {
 		setChanged();
 		notifyObservers(g);
 	}
 	
+	/**
+	 * Notifier la vue
+	 */
 	public void notifier() {
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * Setter de la position
+	 * @param newX
+	 * @param newY
+	 */
 	public void setPosition(int newX, int newY) {
 		x = newX;
 		y = newY;
+		
+		notifier();
 	}
 	
+	/**
+	 * Associe une couleur de la classe Color à un integer
+	 * @param c
+	 * @return Color
+	 */
 	protected Color decodeColor(int c) {
 		switch(c) {
 			case 0: return(Color.black);
@@ -66,52 +92,87 @@ public class Tortue extends Observable {
 		}
 	}
 
+	/**
+	 * Avancer la tortue de la distance passée en paramêtre
+	 * @param dist
+	 */
 	public void avancer(int dist) {
+		
 		int newX = (int) Math.round(x+dist*Math.cos(Commun.ratioDegRad*dir));
 		int newY = (int) Math.round(y+dist*Math.sin(Commun.ratioDegRad*dir));
 		
-		if (crayon==true) {
+		if (crayon) {
 			Segment seg = new Segment();
 			
-			seg.ptStart.x = x;
-			seg.ptStart.y = y;
-			seg.ptEnd.x = newX;
-			seg.ptEnd.y = newY;
-			seg.color = decodeColor(coul);
+			seg.getPtStart().x = x;
+			seg.getPtStart().y = y;
+			seg.getPtEnd().x = newX;
+			seg.getPtEnd().y = newY;
+			seg.setColor(decodeColor(coul));
 	
 			listSegments.add(seg);
 		}
 
 		x = newX;
 		y = newY;
+		
+		notifier();
 	}
 
+	/**
+	 * Tourner à droite la tortue
+	 * @param ang
+	 */
 	public void droite(int ang) {
 		dir = (dir + ang) % 360;
+		notifier();
 	}
 
+	/**
+	 * Tourner à gauche la tortue
+	 * @param ang
+	 */
 	public void gauche(int ang) {
 		dir = (dir - ang) % 360;
+		notifier();
 	}
 
+	/**
+	 * Baisser le crayon sur la feuille pour écrire
+	 */
 	public void baisserCrayon() {
 		crayon = true;
+		notifier();
 	}
 
+	/**
+	 * Lever le crayon de la feuille pour ne plus écrire
+	 */
 	public void leverCrayon() {
 		crayon = false;
+		notifier();
 	}
 
+	/**
+	 * Retourne l'entier modulo 12
+	 * @param n
+	 */
 	public void couleur(int n) {
 		coul = n % 12;
+		notifier();
 	}
 
+	/**
+	 * Incrémente la couleur de 1
+	 */
 	public void couleurSuivante() {
 	 	couleur(coul+1);
+	 	notifier();
 	}
 	
-	/** quelques classiques */
-
+	/**
+	 * Trace un carré
+	 */
 	public void carre() {
 		for (int i=0;i<4;i++) {
 			avancer(100);
@@ -119,6 +180,11 @@ public class Tortue extends Observable {
 		}
 	}
 
+	/**
+	 * Trace un polygone
+	 * @param n
+	 * @param a
+	 */
 	public void poly(int n, int a) {
 		for (int j=0;j<a;j++) {
 			avancer(n);
@@ -126,6 +192,13 @@ public class Tortue extends Observable {
 		}
 	}
 
+	/**
+	 * Trace une spiral en changeant de couleur
+	 * pour chaque segment
+	 * @param n
+	 * @param k
+	 * @param a
+	 */
 	public void spiral(int n, int k, int a) {
 		for (int i = 0; i < k; i++) {
 			couleur(coul+1);
@@ -135,20 +208,24 @@ public class Tortue extends Observable {
 		}
 	}
 	
-	public ArrayList<Segment> getListSegments() {
-		return listSegments;
-	}
+	/************
+	 * GETTER
+	 ************/
+	
+	public ArrayList<Segment> getListSegments() { return listSegments; }
 
-	public int getX() {
-		return x;
-	}
-	public int getY() {
-		return y;
-	}
-	public int getDir() {
-		return dir;
-	}
+	public int getX() { return x; }
+	
+	public int getY() { return y; }
+	
+	public int getDir() { return dir; }
+	
 	public int getColor() {return coul;}
+	
+	/************
+	 * SETTER
+	 ************/
+	
 	public void setColor(int n) {
 		coul = n;
 	}

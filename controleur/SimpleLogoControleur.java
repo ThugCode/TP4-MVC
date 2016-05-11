@@ -34,7 +34,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 		if (c.equals("Avancer")) {
 			try {
 				int v = Integer.parseInt(this.logoVue.getInputValue());
-				logo.getCourante().avancer(v);
+				logo.getCTortue().avancer(v);
 			} catch (NumberFormatException ex){
 				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
 			}
@@ -43,7 +43,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 		else if (c.equals("Droite")) {
 			try {
 				int v = Integer.parseInt(this.logoVue.getInputValue());
-				logo.getCourante().droite(v);
+				logo.getCTortue().droite(v);
 			} catch (NumberFormatException ex){
 				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
 			}
@@ -51,21 +51,21 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 		else if (c.equals("Gauche")) {
 			try {
 				int v = Integer.parseInt(this.logoVue.getInputValue());
-				logo.getCourante().gauche(v);
+				logo.getCTortue().gauche(v);
 			} catch (NumberFormatException ex){
 				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
 			}
 		}
 		else if (c.equals("Lever")) 
-			logo.getCourante().leverCrayon();
+			logo.getCTortue().leverCrayon();
 		else if (c.equals("Baisser"))
-			logo.getCourante().baisserCrayon();
+			logo.getCTortue().baisserCrayon();
 		else if (c.equals("Proc1"))
-			logo.getCourante().carre();
+			logo.getCTortue().carre();
 		else if (c.equals("Proc2"))
-			logo.getCourante().poly(60,8);
+			logo.getCTortue().poly(60,8);
 		else if (c.equals("Proc3"))
-			logo.getCourante().spiral(50,40,6);
+			logo.getCTortue().spiral(50,40,6);
 		else if (c.equals("Effacer"))
 			logoVue.effacer();
 		else if (c.equals("Quitter"))
@@ -73,10 +73,8 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 		else if (c.equals("Couleur")) {
 			JComboBox cb = (JComboBox)e.getSource();
 			int n = cb.getSelectedIndex();
-			logo.getCourante().setColor(n);
+			logo.getCTortue().setColor(n);
 		}
-
-		logo.getDessin().notifier();
 	}
 
 	/**

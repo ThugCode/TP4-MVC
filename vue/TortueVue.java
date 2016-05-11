@@ -1,11 +1,9 @@
 package vue;
 
-// package logo;
-
 import java.awt.*;
 import javax.swing.*;
 
-import modele.Commun;
+import commun.Commun;
 import modele.Segment;
 import modele.Tortue;
 
@@ -13,28 +11,12 @@ import java.awt.event.*;
 import java.util.*;
 import java.io.*;
 
-
-/*************************************************************************
-
-	Un petit Logo minimal qui devra etre ameliore par la suite
-
-	Source originale : J. Ferber - 1999-2001
-
-			   Cours de DESS TNI - Montpellier II
-
-	@version 2.0
-	@date 25/09/2001
-
-**************************************************************************/
-
-
-public class TortueVue implements Observer
+public class TortueVue
 {	
 	private Tortue tortue;
-	
+
 	public TortueVue(Tortue p_tortue) {
 		tortue = p_tortue;
-		tortue.addObserver(this);
 	}
 	
 	public void drawTurtle (Graphics graph) {
@@ -76,9 +58,8 @@ public class TortueVue implements Observer
 		graph.setColor(Color.green);
 		graph.fillPolygon(arrow);
     }
-
-	@Override
-	public void update(Observable o, Object arg) {
-		drawTurtle((Graphics) arg);
+	
+	public Tortue getTortue() {
+		return tortue;
 	}
 }

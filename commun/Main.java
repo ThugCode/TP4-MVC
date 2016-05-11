@@ -1,4 +1,4 @@
-package logoInit;
+package commun;
 
 import javax.swing.SwingUtilities;
 
