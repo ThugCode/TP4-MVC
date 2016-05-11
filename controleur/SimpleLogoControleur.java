@@ -12,15 +12,10 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 
 	private SimpleLogo logo;
 	private SimpleLogoVue logoVue;
-	
-	public SimpleLogoControleur(SimpleLogo p_logo, SimpleLogoVue p_logoVue) {
+
+	public SimpleLogoControleur(SimpleLogo p_logo) {
 		
 		logo = p_logo;
-		logoVue = p_logoVue;
-		
-		logoVue.b20.addActionListener(this);
-		logoVue.b21.addActionListener(this);
-		logoVue.b22.addActionListener(this);
 	}
 
 	@Override
@@ -29,7 +24,6 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 
 		// actions des boutons du haut
 		if (c.equals("Avancer")) {
-			System.out.println("command avancer");
 			try {
 				int v = Integer.parseInt(this.logoVue.inputValue.getText());
 				logo.getCourante().avancer(v);
@@ -103,5 +97,12 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 	@Override
 	public void windowDeactivated(WindowEvent e) {}
 	
+	public SimpleLogoVue getLogoVue() {
+		return logoVue;
+	}
+
+	public void setLogoVue(SimpleLogoVue logoVue) {
+		this.logoVue = logoVue;
+	}
 	
 }

@@ -44,8 +44,11 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	public JButton b21;
 	public JButton b22;
 
-	public SimpleLogoVue(SimpleLogo p_logo) {
+	public SimpleLogoVue(SimpleLogo p_logo, SimpleLogoControleur p_logoControleur) {
 		super("un logo tout simple");
+		
+		controleur = p_logoControleur;
+		this.addWindowListener(controleur);
 		
 		logo = p_logo;
 		logo.addObserver(this);
@@ -127,6 +130,10 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		
 		b22 = new JButton("Proc3");
 		p2.add(b22);
+		
+		b20.addActionListener(controleur);
+		b21.addActionListener(controleur);
+		b22.addActionListener(controleur);
 
 		getContentPane().add(p2,"South");
 

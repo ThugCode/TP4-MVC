@@ -13,11 +13,11 @@ public class Main {
 			public void run() {
 
 				SimpleLogo logo = new SimpleLogo();
-				SimpleLogoVue logoVue = new SimpleLogoVue(logo);
-				SimpleLogoControleur logoControleur = new SimpleLogoControleur(logo, logoVue);
+				SimpleLogoControleur logoControleur = new SimpleLogoControleur(logo);
+				SimpleLogoVue logoVue = new SimpleLogoVue(logo, logoControleur);
 				
-				logoVue.setControleur(logoControleur);				
-				logoVue.addWindowListener(logoControleur);
+				logoControleur.setLogoVue(logoVue);				
+				
 				logoVue.setVisible(true);
 			}
 		});
