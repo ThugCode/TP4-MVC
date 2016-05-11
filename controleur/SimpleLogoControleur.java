@@ -77,7 +77,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 			logoVue.effacer();
 		} 
 		else if (c.equals("Couleur")) {
-			JComboBox cb = (JComboBox)e.getSource();
+			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 			int n = cb.getSelectedIndex();
 			logo.getCTortue().setColor(n);
 		}

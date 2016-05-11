@@ -23,6 +23,7 @@ public class Tortue extends Observable {
 	 */
 	public Tortue() { 
 		listSegments = new ArrayList<Segment>();
+		coul = 0;
 		reset();
 	}
 
@@ -33,7 +34,6 @@ public class Tortue extends Observable {
 		x = 0;
 		y = 0;
 		dir = -90;
-		coul = 0;
 		crayon = true;
 		listSegments.clear();
 		
@@ -74,7 +74,7 @@ public class Tortue extends Observable {
 	 * @param c
 	 * @return Color
 	 */
-	protected Color decodeColor(int c) {
+	public Color decodeColor(int c) {
 		switch(c) {
 			case 0: return(Color.black);
 			case 1: return(Color.blue);
@@ -228,5 +228,6 @@ public class Tortue extends Observable {
 	
 	public void setColor(int n) {
 		coul = n;
+		notifier();
 	}
 }
