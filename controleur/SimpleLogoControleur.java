@@ -10,6 +10,9 @@ import javax.swing.JComboBox;
 import modele.SimpleLogo;
 import vue.SimpleLogoVue;
 
+/**
+ * @author GERLAND - LETOURNEUR
+ */
 public class SimpleLogoControleur implements ActionListener, WindowListener {
 
 	private SimpleLogo logo;
@@ -30,7 +33,6 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 	public void actionPerformed(ActionEvent e) {
 		String c = e.getActionCommand();
 
-		// actions des boutons du haut
 		if (c.equals("Avancer")) {
 			try {
 				int v = Integer.parseInt(this.logoVue.getInputValue());
@@ -56,24 +58,31 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
 			}
 		}
-		else if (c.equals("Lever")) 
+		else if (c.equals("Lever")) {
 			logo.getCTortue().leverCrayon();
-		else if (c.equals("Baisser"))
+		} 
+		else if (c.equals("Baisser")) {
 			logo.getCTortue().baisserCrayon();
-		else if (c.equals("Proc1"))
+		} 
+		else if (c.equals("Proc1")) {
 			logo.getCTortue().carre();
-		else if (c.equals("Proc2"))
+		} 
+		else if (c.equals("Proc2")) {
 			logo.getCTortue().poly(60,8);
-		else if (c.equals("Proc3"))
+		} 
+		else if (c.equals("Proc3")) {
 			logo.getCTortue().spiral(50,40,6);
-		else if (c.equals("Effacer"))
+		} 
+		else if (c.equals("Effacer")) {
 			logoVue.effacer();
-		else if (c.equals("Quitter"))
-			System.exit(0);
+		} 
 		else if (c.equals("Couleur")) {
 			JComboBox cb = (JComboBox)e.getSource();
 			int n = cb.getSelectedIndex();
 			logo.getCTortue().setColor(n);
+		}
+		else if (c.equals("Quitter")) {
+			System.exit(0);
 		}
 	}
 

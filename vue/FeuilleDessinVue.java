@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,15 +11,24 @@ import javax.swing.JPanel;
 
 import modele.Tortue;
 
+/**
+ * @author GERLAND - LETOURNEUR
+ */
 public class FeuilleDessinVue extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<TortueVue> tortues;
 
+	/**
+	 * Constructeur
+	 */
 	public FeuilleDessinVue() {
 		tortues = new ArrayList<TortueVue>();
 	}
 	
+	/**
+	 * Affichage de la feuille de dessin avec les tortues
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -34,30 +42,40 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 		showTurtles(g);
 	}
 	
+	/**
+	 * Ajouter une tortue sur la feuille de dessin
+	 * @param o
+	 */
 	public void addTortue(Tortue o) {
-		TortueVue tv = new TortueVue(o);
-		tortues.add(tv);
+		TortueVue tortueVue = new TortueVue(o);
+		tortues.add(tortueVue);
 		o.addObserver(this);
 		
 		this.repaint();
 	}
 	
+	/**
+	 * Appel de chaque tortue pour l'afficher
+	 * @param g
+	 */
 	public void showTurtles(Graphics g) {
-		for(TortueVue tv : tortues) {
-			tv.drawTurtle(g);
+		for(TortueVue tortueVue : tortues) {
+			tortueVue.drawTurtle(g);
 		}
 	}
 
+	/**
+	 * Réinitialisation des tortues
+	 */
 	public void reset() {
-		for (Iterator<TortueVue> it = tortues.iterator();it.hasNext();) {
-			Tortue t = it.next().getTortue();
-			t.reset();
+		for (TortueVue tortueVue : tortues) {
+			tortueVue.getTortue().reset();
 		}
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		repaint();
+		this.repaint();
 	}
 	
 	public ArrayList<TortueVue> getTortues() {

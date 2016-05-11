@@ -27,11 +27,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.SpringLayout;
+
+import com.sun.org.apache.bcel.internal.Constants;
 
 import commun.Commun;
 import controleur.SimpleLogoControleur;
 import modele.SimpleLogo;
 
+/**
+ * @author GERLAND - LETOURNEUR
+ */
 public class SimpleLogoVue extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	
@@ -45,78 +51,82 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	 * @param p_logoControleur
 	 */
 	public SimpleLogoVue(SimpleLogo p_logo, SimpleLogoControleur p_logoControleur) {
-		super("un logo tout simple");
+		super("Un logo par GERLAND Loïc et LETOURNEUR Léo");
 		
 		controleur = p_logoControleur;
 		this.addWindowListener(controleur);
 		
 		logo = p_logo;
 		logo.addObserver(this);
+		
 		logoInit();
+		
+		pack();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 
 	/**
 	 * Constuction de la fenetre
 	 */
 	public void logoInit() {
+		
 		getContentPane().setLayout(new BorderLayout(10,10));
 
-		// Boutons
-		JToolBar toolBar = new JToolBar();
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(toolBar);
-
-		getContentPane().add(buttonPanel,"North");
-
-		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
-		
-		toolBar.add(Box.createRigidArea(Commun.HGAP));
+		//HAUT
 		inputValue=new JTextField("45",5);
+		
+		JToolBar toolBar = new JToolBar();
 		toolBar.add(inputValue);
+		toolBar.add(Box.createRigidArea(Commun.HGAP));
+		
+		// Boutons
+		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
 		addButton(toolBar, "Avancer", "Avancer 50", null);
 		addButton(toolBar, "Droite", "Droite 45", null);
 		addButton(toolBar, "Gauche", "Gauche 45", null);
 		addButton(toolBar, "Lever", "Lever Crayon", null);
 		addButton(toolBar, "Baisser", "Baisser Crayon", null);
-
-		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
-								 "vert", "gris clair", "magenta", "orange",
-								 "gris", "rose", "jaune"};
-
+		
 		// Create the combo box
+		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
+				 "vert", "gris clair", "magenta", "orange",
+				 "gris", "rose", "jaune"};
 		toolBar.add(Box.createRigidArea(Commun.HGAP));
 		JLabel colorLabel = new JLabel("   Couleur: ");
 		toolBar.add(colorLabel);
-		JComboBox colorList = new JComboBox(colorStrings);
+		JComboBox<String> colorList = new JComboBox<String>(colorStrings);
 		colorList.setActionCommand("Couleur");
 		colorList.addActionListener(controleur);
 		toolBar.add(colorList);
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(toolBar);
+		getContentPane().add(buttonPanel,"North");
 
-		// Menus
-		JMenuBar menubar=new JMenuBar();
-		setJMenuBar(menubar);	// on installe le menu bar
-		JMenu menuFile=new JMenu("File"); // on installe le premier menu
+		//MENU
+		JMenuBar menubar = new JMenuBar();
+		JMenu menuFile = new JMenu("File");
 		menubar.add(menuFile);
-
 		addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
 		addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
-
-		JMenu menuCommandes=new JMenu("Commandes"); // on installe le premier menu
+		
+		JMenu menuCommandes = new JMenu("Commandes");
 		menubar.add(menuCommandes);
 		addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
 		addMenuItem(menuCommandes, "Droite", "Droite", -1);
 		addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
 		addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
 		addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
-
-		JMenu menuHelp=new JMenu("Aide"); // on installe le premier menu
+		
+		JMenu menuHelp=new JMenu("Aide");
 		menubar.add(menuHelp);
 		addMenuItem(menuHelp, "Aide", "Help", -1);
 		addMenuItem(menuHelp, "A propos", "About", -1);
-
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		// les boutons du bas
+		
+		setJMenuBar(menubar);
+		
+		//BAS
 		JPanel p2 = new JPanel(new GridLayout());
 		JButton b20 = new JButton("Proc1");
 		b20.addActionListener(controleur);
@@ -132,20 +142,18 @@ public class SimpleLogoVue extends JFrame implements Observer {
 
 		getContentPane().add(p2,"South");
 
+		//FEUILLE
 		FeuilleDessinVue feuilleVue = new FeuilleDessinVue();
-		feuilleVue.setBackground(Color.white);
-		feuilleVue.setSize(new Dimension(600,400));
-		feuilleVue.setPreferredSize(new Dimension(600,400));
+		feuilleVue.setBackground(Color.red);
+		feuilleVue.setSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
+		feuilleVue.setPreferredSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
 			
 		getContentPane().add(feuilleVue,"Center");
 		
-		// Creation de la tortue
-		new TortueVue(logo.getCTortue());
+		//TORTUE
+		TortueVue tortueVue = new TortueVue(logo.getCTortue());
 		logo.getCTortue().setPosition(510/2, 400/2);
 		logo.getDessin().addTortue(logo.getCTortue());
-
-		pack();
-		setVisible(true);
 	}
 
 	/**
@@ -164,7 +172,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		logo.getDessin().reset();
 
 		// Replace la tortue au centre
-		Dimension size = new Dimension(600, 400);
+		Dimension size = new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE);
 		logo.getCTortue().setPosition(size.width/2, size.height/2);
 	}
 	
@@ -221,7 +229,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub		
+		this.repaint();		
 	}
 	
 	public SimpleLogoControleur getControleur() {

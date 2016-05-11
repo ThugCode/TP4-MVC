@@ -1,31 +1,43 @@
 package vue;
 
 import java.awt.*;
-import javax.swing.*;
 
 import commun.Commun;
 import modele.Segment;
 import modele.Tortue;
 
-import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-
+/**
+ * @author GERLAND - LETOURNEUR
+ */
 public class TortueVue
 {	
 	private Tortue tortue;
 
+	public Tortue getTortue() {
+		return tortue;
+	}
+	
+	/**
+	 * Constructeur
+	 * @param p_tortue
+	 */
 	public TortueVue(Tortue p_tortue) {
 		tortue = p_tortue;
 	}
 	
+	/**
+	 * Dessiner la tortue et ses segments
+	 * @param graph
+	 */
 	public void drawTurtle (Graphics graph) {
-		if (graph==null)
+		
+		if (graph==null) {
+			System.out.println("Impossible de trouver le Graphics pour dessiner la tortue");
 			return;
+		}
 		
 		// Dessine les segments
-		for(Iterator it = tortue.getListSegments().iterator();it.hasNext();) {
-			Segment seg = (Segment) it.next();
+		for(Segment seg : tortue.getListSegments()) {
 			seg.drawSegment(graph);
 		}
 
@@ -58,8 +70,4 @@ public class TortueVue
 		graph.setColor(Color.green);
 		graph.fillPolygon(arrow);
     }
-	
-	public Tortue getTortue() {
-		return tortue;
-	}
 }
