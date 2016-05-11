@@ -9,12 +9,12 @@ import java.util.Observable;
  * @author GERLAND - LETOURNEUR
  *
  */
-public class Dessin extends Observable {
+public class FeuilleDessin extends Observable {
 	
 	// Liste des tortues enregistrees
 	private ArrayList<Tortue> tortues;
 
-	public Dessin() {
+	public FeuilleDessin() {
 		tortues = new ArrayList<Tortue>();
 	}
 

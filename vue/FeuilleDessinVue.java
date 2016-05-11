@@ -3,7 +3,7 @@ package vue;
 import java.awt.*;
 import javax.swing.*;
 
-import modele.Dessin;
+import modele.FeuilleDessin;
 import modele.Tortue;
 
 import java.util.*;
@@ -17,12 +17,12 @@ import java.util.*;
  * @version 2.0
  */
 
-public class FeuilleDessin extends JPanel implements Observer {
+public class FeuilleDessinVue extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	
-	private Dessin dessin;
+	private FeuilleDessin dessin;
 	
-	public FeuilleDessin(Dessin p_dessin) {
+	public FeuilleDessinVue(FeuilleDessin p_dessin) {
 		dessin = p_dessin;
 		dessin.addObserver(this);
 	}
