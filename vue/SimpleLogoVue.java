@@ -2,22 +2,43 @@ package vue;
 
 
 // package logo;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Event;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.Observable;
+import java.util.Observer;
 
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 
-import javax.swing.*;
-
+import controleur.SimpleLogoControleur;
 import modele.Commun;
-import modele.FeuilleDessin;
 import modele.SimpleLogo;
-import modele.Tortue;
 
-import java.awt.event.*;
-
-public class SimpleLogoVue extends JFrame {
+public class SimpleLogoVue extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	
 	private SimpleLogo logo;
+	private SimpleLogoControleur controleur;
 	public JTextField inputValue;
 	public JButton b20;
 	public JButton b21;
@@ -27,10 +48,10 @@ public class SimpleLogoVue extends JFrame {
 		super("un logo tout simple");
 		
 		logo = p_logo;
-		
+		logo.addObserver(this);
 		logoInit();
 	}
-	
+
 	public void logoInit() {
 		getContentPane().setLayout(new BorderLayout(10,10));
 
@@ -118,7 +139,7 @@ public class SimpleLogoVue extends JFrame {
 		
 		// Creation de la tortue
 		TortueVue tortueVue = new TortueVue(logo.getCourante());
-		logo.getCourante().setPosition(500/2, 400/2);
+		logo.getCourante().setPosition(510/2, 400/2);
 		logo.getDessin().addTortue(logo.getCourante());
 
 		pack();
@@ -128,21 +149,6 @@ public class SimpleLogoVue extends JFrame {
 	public String getInputValue(){
 		String s = inputValue.getText();
 		return(s);
-	}
-
-	
-
-  	/** les procedures Logo qui combine plusieurs commandes..*/
-	public void proc1() {
-		logo.getCourante().carre();
-	}
-
-	public void proc2() {
-		logo.getCourante().poly(60,8);
-	}
-
-	public void proc3() {
-		logo.getCourante().spiral(50,40,6);
 	}
 
 	// efface tout et reinitialise la feuille
@@ -174,7 +180,7 @@ public class SimpleLogoVue extends JFrame {
 		b.setToolTipText(tooltiptext);
 		b.setBorder(BorderFactory.createRaisedBevelBorder());
 		b.setMargin(new Insets(0,0,0,0));
-		b.addActionListener(this);
+		b.addActionListener(controleur);
 	}
 
 	public void addMenuItem(JMenu m, String label, String command, int key) {
@@ -183,12 +189,25 @@ public class SimpleLogoVue extends JFrame {
 		m.add(menuItem);
 
 		menuItem.setActionCommand(command);
-		menuItem.addActionListener(this);
+		menuItem.addActionListener(controleur);
 		if (key > 0) {
 			if (key != KeyEvent.VK_DELETE)
 				menuItem.setAccelerator(KeyStroke.getKeyStroke(key, Event.CTRL_MASK, false));
 			else
 				menuItem.setAccelerator(KeyStroke.getKeyStroke(key, 0, false));
 		}
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub		
+	}
+	
+	public SimpleLogoControleur getControleur() {
+		return controleur;
+	}
+
+	public void setControleur(SimpleLogoControleur controleur) {
+		this.controleur = controleur;
 	}
 }

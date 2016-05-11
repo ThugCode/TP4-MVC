@@ -15,12 +15,12 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 	
 	public SimpleLogoControleur(SimpleLogo p_logo, SimpleLogoVue p_logoVue) {
 		
-		this.logo = p_logo;
-		this.logoVue = p_logoVue;
+		logo = p_logo;
+		logoVue = p_logoVue;
 		
-		this.logoVue.b20.addActionListener(this);
-		this.logoVue.b21.addActionListener(this);
-		this.logoVue.b22.addActionListener(this);
+		logoVue.b20.addActionListener(this);
+		logoVue.b21.addActionListener(this);
+		logoVue.b22.addActionListener(this);
 	}
 
 	@Override
@@ -59,22 +59,34 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 		else if (c.equals("Baisser"))
 			logo.getCourante().baisserCrayon();
 		else if (c.equals("Proc1"))
-			this.logoVue.proc1();
+			proc1();
 		else if (c.equals("Proc2"))
-			this.logoVue.proc2();
+			proc2();
 		else if (c.equals("Proc3"))
-			this.logoVue.proc3();
+			proc3();
 		else if (c.equals("Effacer"))
-			this.logoVue.effacer();
+			logoVue.effacer();
 		else if (c.equals("Quitter"))
 			System.exit(0);
 
-		logo.getDessin().notifyObservers();
+		logo.getDessin().notifier();
+	}
+	
+  	/** les procedures Logo qui combine plusieurs commandes..*/
+	public void proc1() {
+		logo.getCourante().carre();
+	}
+
+	public void proc2() {
+		logo.getCourante().poly(60,8);
+	}
+
+	public void proc3() {
+		logo.getCourante().spiral(50,40,6);
 	}
 
 	@Override
 	public void windowClosing(WindowEvent arg0) {
-		this.windowClosing(arg0);
         System.exit(0);
     }
 	

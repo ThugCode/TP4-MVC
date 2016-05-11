@@ -1,12 +1,16 @@
 package vue;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JPanel;
 
 import modele.FeuilleDessin;
 import modele.Tortue;
-
-import java.util.*;
 
 /**
  * Titre :        Logo
@@ -43,7 +47,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	public void showTurtles(Graphics g) {
 		for(Iterator<Tortue> it = dessin.getTortues().iterator();it.hasNext();) {
 			Tortue t = (Tortue) it.next();
-			t.notifyObservers();
+			t.notifier(g);
 		}
 	}
 

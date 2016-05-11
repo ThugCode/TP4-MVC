@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -31,15 +32,21 @@ public class Tortue extends Observable {
 		coul = 0;
 		crayon = true;
 		listSegments.clear();
+  	}
+	
+	public void notifier(Graphics g) {
+		setChanged();
+		notifyObservers(g);
+	}
+	
+	public void notifier() {
 		setChanged();
 		notifyObservers();
-  	}
+	}
 
 	public void setPosition(int newX, int newY) {
 		x = newX;
 		y = newY;
-		setChanged();
-		notifyObservers();
 	}
 	
 	protected Color decodeColor(int c) {
@@ -78,20 +85,14 @@ public class Tortue extends Observable {
 
 		x = newX;
 		y = newY;
-		setChanged();
-		notifyObservers();
 	}
 
 	public void droite(int ang) {
 		dir = (dir + ang) % 360;
-		setChanged();
-		notifyObservers();
 	}
 
 	public void gauche(int ang) {
 		dir = (dir - ang) % 360;
-		setChanged();
-		notifyObservers();
 	}
 
 	public void baisserCrayon() {
@@ -117,8 +118,6 @@ public class Tortue extends Observable {
 			avancer(100);
 			droite(90);
 		}
-		setChanged();
-		notifyObservers();
 	}
 
 	public void poly(int n, int a) {
@@ -126,8 +125,6 @@ public class Tortue extends Observable {
 			avancer(n);
 			droite(360/a);
 		}
-		setChanged();
-		notifyObservers();
 	}
 
 	public void spiral(int n, int k, int a) {
@@ -137,8 +134,6 @@ public class Tortue extends Observable {
 			droite(360/a);
 			n = n+1;
 		}
-		setChanged();
-		notifyObservers();
 	}
 	
 	public ArrayList<Segment> getListSegments() {
@@ -157,8 +152,5 @@ public class Tortue extends Observable {
 	public int getColor() {return coul;}
 	public void setColor(int n) {
 		coul = n;
-		setChanged();
-		notifyObservers();
 	}
-	
 }

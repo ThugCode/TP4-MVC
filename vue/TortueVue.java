@@ -34,6 +34,7 @@ public class TortueVue implements Observer
 	
 	public TortueVue(Tortue p_tortue) {
 		tortue = p_tortue;
+		tortue.addObserver(this);
 	}
 	
 	public void drawTurtle (Graphics graph) {
@@ -78,7 +79,6 @@ public class TortueVue implements Observer
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		drawTurtle((Graphics) arg);
 	}
 }

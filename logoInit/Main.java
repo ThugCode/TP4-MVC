@@ -1,8 +1,5 @@
 package logoInit;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.SwingUtilities;
 
 import controleur.SimpleLogoControleur;
@@ -19,6 +16,7 @@ public class Main {
 				SimpleLogoVue logoVue = new SimpleLogoVue(logo);
 				SimpleLogoControleur logoControleur = new SimpleLogoControleur(logo, logoVue);
 				
+				logoVue.setControleur(logoControleur);				
 				logoVue.addWindowListener(logoControleur);
 				logoVue.setVisible(true);
 			}

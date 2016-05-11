@@ -1,11 +1,13 @@
 package modele;
 
+import java.util.Observable;
+
 /**
  * 
  * @author GERLAND - LETOURNEUR
  *
  */
-public class SimpleLogo {
+public class SimpleLogo extends Observable {
 
 	private FeuilleDessin dessin;
 	private Tortue courante;

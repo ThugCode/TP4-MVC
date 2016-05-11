@@ -21,8 +21,7 @@ public class FeuilleDessin extends Observable {
 	public void addTortue(Tortue o) {
 		tortues.add(o);
 		
-		this.setChanged();
-		this.notifyObservers();
+		notifier();
 	}
 	
 	public void reset() {
@@ -31,11 +30,15 @@ public class FeuilleDessin extends Observable {
 			t.reset();
 		}
 		
-		this.setChanged();
-		this.notifyObservers();
+		notifier();
 	}
 	
 	public ArrayList<Tortue> getTortues() {
 		return tortues;
+	}
+	
+	public void notifier() {
+		setChanged();
+		notifyObservers();
 	}
 }
