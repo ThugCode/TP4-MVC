@@ -47,7 +47,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * @param o
 	 */
 	public void addTortue(Tortue o) {
-		TortueVue tortueVue = new TortueVue(o);
+		TortueCercleVue tortueVue = new TortueCercleVue(o);
 		tortues.add(tortueVue);
 		o.addObserver(this);
 		
