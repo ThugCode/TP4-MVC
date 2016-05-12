@@ -2,8 +2,10 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.JComboBox;
 
@@ -13,7 +15,7 @@ import vue.SimpleLogoVue;
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class SimpleLogoControleur implements ActionListener, WindowListener {
+public class SimpleLogoControleur implements ActionListener, WindowListener, KeyListener {
 
 	private SimpleLogo logo;
 	private SimpleLogoVue logoVue;
@@ -25,6 +27,27 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 	public SimpleLogoControleur(SimpleLogo p_logo) {
 		logo = p_logo;
 	}
+	
+	private int verifieNombre() {
+		try {
+			return Integer.parseInt(this.logoVue.getInputValue());
+		} catch (NumberFormatException ex){
+			System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
+			return 0;
+		}
+	}
+	
+	private void avancer() {
+		logo.getCTortue().avancer(verifieNombre());
+	}
+	
+	private void gauche() {
+		logo.getCTortue().gauche(verifieNombre());
+	}
+	
+	private void droite() {
+		logo.getCTortue().droite(verifieNombre());
+	}
 
 	/**
 	 * ActionPerformed
@@ -34,29 +57,13 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 		String c = e.getActionCommand();
 
 		if (c.equals("Avancer")) {
-			try {
-				int v = Integer.parseInt(this.logoVue.getInputValue());
-				logo.getCTortue().avancer(v);
-			} catch (NumberFormatException ex){
-				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
-			}
-			
+			this.avancer();
 		}
 		else if (c.equals("Droite")) {
-			try {
-				int v = Integer.parseInt(this.logoVue.getInputValue());
-				logo.getCTortue().droite(v);
-			} catch (NumberFormatException ex){
-				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
-			}
+			this.droite();
 		}
 		else if (c.equals("Gauche")) {
-			try {
-				int v = Integer.parseInt(this.logoVue.getInputValue());
-				logo.getCTortue().gauche(v);
-			} catch (NumberFormatException ex){
-				System.err.println("ce n'est pas un nombre : " + this.logoVue.getInputValue());
-			}
+			this.gauche();
 		}
 		else if (c.equals("Lever")) {
 			logo.getCTortue().leverCrayon();
@@ -107,6 +114,28 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 	@Override
 	public void windowDeactivated(WindowEvent e) {}
 	
+	@Override
+	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if((e.getKeyCode()==KeyEvent.VK_ENTER)) {
+			logoVue.setFocusable(true);
+			logoVue.requestFocusInWindow();
+		} else if((e.getKeyCode()==KeyEvent.VK_UP)) {
+			this.avancer();
+		} else if((e.getKeyCode()==KeyEvent.VK_LEFT)) {
+			this.gauche();
+		} else if((e.getKeyCode()==KeyEvent.VK_RIGHT)) {
+			this.droite();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+	
 	public SimpleLogoVue getLogoVue() {
 		return logoVue;
 	}
@@ -114,5 +143,4 @@ public class SimpleLogoControleur implements ActionListener, WindowListener {
 	public void setLogoVue(SimpleLogoVue logoVue) {
 		this.logoVue = logoVue;
 	}
-	
 }

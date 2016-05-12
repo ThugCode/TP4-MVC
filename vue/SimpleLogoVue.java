@@ -1,7 +1,5 @@
 package vue;
 
-
-// package logo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,9 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import javax.swing.SpringLayout;
-
-import com.sun.org.apache.bcel.internal.Constants;
 
 import commun.Commun;
 import controleur.SimpleLogoControleur;
@@ -56,6 +51,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		
 		controleur = p_logoControleur;
 		this.addWindowListener(controleur);
+		this.addKeyListener(controleur);
 		
 		logo = p_logo;
 		logo.addObserver(this);
@@ -75,7 +71,10 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		getContentPane().setLayout(new BorderLayout(10,10));
 
 		//HAUT
-		inputValue=new JTextField("45",5);
+		inputValue = new JTextField("45",5);
+		
+		this.setFocusable(true);
+		this.requestFocusInWindow();
 		
 		JToolBar toolBar = new JToolBar();
 		toolBar.add(inputValue);
