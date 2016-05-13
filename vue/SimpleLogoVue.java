@@ -4,11 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Event;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -29,6 +31,7 @@ import javax.swing.KeyStroke;
 import commun.Commun;
 import controleur.SimpleLogoControleur;
 import modele.SimpleLogo;
+import modele.Tortue;
 
 /**
  * @author GERLAND - LETOURNEUR
@@ -69,65 +72,46 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	public void logoInit() {
 		
 		getContentPane().setLayout(new BorderLayout(10,10));
-
-		//HAUT
-		inputValue = new JTextField("45",5);
-		
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		
-		JToolBar toolBar = new JToolBar();
-		toolBar.add(inputValue);
-		toolBar.add(Box.createRigidArea(Commun.HGAP));
+		toolInit();
 		
-		// Boutons
-		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
-		addButton(toolBar, "Avancer", "Avancer 50", null);
-		addButton(toolBar, "Droite", "Droite 45", null);
-		addButton(toolBar, "Gauche", "Gauche 45", null);
-		addButton(toolBar, "Lever", "Lever Crayon", null);
-		addButton(toolBar, "Baisser", "Baisser Crayon", null);
+		menuInit();
 		
-		// Create the combo box
-		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge",
-				 "vert", "gris clair", "magenta", "orange",
-				 "gris", "rose", "jaune"};
-		toolBar.add(Box.createRigidArea(Commun.HGAP));
-		JLabel colorLabel = new JLabel("   Couleur: ");
-		toolBar.add(colorLabel);
-		JComboBox<String> colorList = new JComboBox<String>(colorStrings);
-		colorList.setActionCommand("Couleur");
-		colorList.addActionListener(controleur);
-		toolBar.add(colorList);
+		if(logo.isControle())
+			procInit();
 		
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(toolBar);
-		getContentPane().add(buttonPanel,"North");
+		//FEUILLE
+		logo.getDessin().setBackground(Color.red);
+		logo.getDessin().setSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
+		logo.getDessin().setPreferredSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
+		getContentPane().add(logo.getDessin(),"Center");
+		
+		//TORTUE
+		logo.getCTortue().setPosition(Commun.LARGEURFEUILLE/2, Commun.HAUTEURFEUILLE/2);
+		logo.getDessin().addTortue(logo.getCTortue());
+		
+		if(!logo.isControle()) {
+			Random rand = new Random();
+			for(int i = 0; i<5; i++) {
+				int indexLargeur = rand.nextInt(Commun.LARGEURFEUILLE);
+				int indexHauteur = rand.nextInt(Commun.HAUTEURFEUILLE);
+				
+				Tortue tortue = new Tortue();
+				tortue.setPosition(indexLargeur, indexHauteur);
+				logo.getDessin().addTortue(tortue);
+			}
+		}
+	}
 
-		//MENU
-		JMenuBar menubar = new JMenuBar();
-		JMenu menuFile = new JMenu("File");
-		menubar.add(menuFile);
-		addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
-		addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
+	/**
+	 * Initialisation de la toolbar
+	 */
+	public void procInit() {
 		
-		JMenu menuCommandes = new JMenu("Commandes");
-		menubar.add(menuCommandes);
-		addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
-		addMenuItem(menuCommandes, "Droite", "Droite", -1);
-		addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
-		addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
-		addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
-		
-		JMenu menuHelp=new JMenu("Aide");
-		menubar.add(menuHelp);
-		addMenuItem(menuHelp, "Aide", "Help", -1);
-		addMenuItem(menuHelp, "A propos", "About", -1);
-		
-		setJMenuBar(menubar);
-		
-		//BAS
 		JPanel p2 = new JPanel(new GridLayout());
+		
 		JButton b20 = new JButton("Proc1");
 		b20.addActionListener(controleur);
 		p2.add(b20);
@@ -141,18 +125,77 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		p2.add(b22);
 
 		getContentPane().add(p2,"South");
-
-		//FEUILLE
-		logo.getDessin().setBackground(Color.red);
-		logo.getDessin().setSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
-		logo.getDessin().setPreferredSize(new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE));
-		getContentPane().add(logo.getDessin(),"Center");
-		
-		//TORTUE
-		logo.getCTortue().setPosition(510/2, 400/2);
-		logo.getDessin().addTortue(logo.getCTortue());
 	}
-
+	
+	/**
+	 * Initialisation de la toolbar
+	 */
+	public void toolInit() {
+		
+		JToolBar toolBar = new JToolBar();
+		
+		if(logo.isControle()) {
+			inputValue = new JTextField("45",5);
+			toolBar.add(inputValue);
+			
+			toolBar.add(Box.createRigidArea(Commun.HGAP));
+		}
+		
+		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
+		
+		if(logo.isControle()) {
+			addButton(toolBar, "Avancer", "Avancer 50", null);
+			addButton(toolBar, "Droite", "Droite 45", null);
+			addButton(toolBar, "Gauche", "Gauche 45", null);
+			addButton(toolBar, "Lever", "Lever Crayon", null);
+			addButton(toolBar, "Baisser", "Baisser Crayon", null);
+		}
+		
+		// Create the combo box
+		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge", "vert", "gris clair",
+									"magenta", "orange", "gris", "rose", "jaune"};
+		toolBar.add(Box.createRigidArea(Commun.HGAP));
+		JLabel colorLabel = new JLabel("   Couleur: ");
+		toolBar.add(colorLabel);
+		JComboBox<String> colorList = new JComboBox<String>(colorStrings);
+		colorList.setActionCommand("Couleur");
+		colorList.addActionListener(controleur);
+		toolBar.add(colorList);
+		
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(toolBar);
+		
+		getContentPane().add(buttonPanel,"North");
+	}
+	
+	/**
+	 * Initialisation du menu
+	 */
+	public void menuInit() {
+		JMenuBar menubar = new JMenuBar();
+		JMenu menuFile = new JMenu("File");
+		menubar.add(menuFile);
+		addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
+		addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
+		
+		if(logo.isControle()) {
+			JMenu menuCommandes = new JMenu("Commandes");
+			menubar.add(menuCommandes);
+			addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
+			addMenuItem(menuCommandes, "Droite", "Droite", -1);
+			addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
+			addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
+			addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
+		}
+		
+		JMenu menuHelp=new JMenu("Aide");
+		menubar.add(menuHelp);
+		addMenuItem(menuHelp, "Aide", "Help", -1);
+		addMenuItem(menuHelp, "A propos", "About", -1);
+		
+		setJMenuBar(menubar);
+	}
+	
 	/**
 	 * Getter sur la valeur du champs input
 	 * @return String

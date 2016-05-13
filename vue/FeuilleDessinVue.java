@@ -6,9 +6,11 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
+import commun.Commun;
 import modele.Tortue;
 
 /**
@@ -70,6 +72,41 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	public void reset() {
 		for (TortueVue tortueVue : tortues) {
 			tortueVue.getTortue().reset();
+		}
+	}
+	
+	/**
+	 * Changer la couleur de toutes les tortues
+	 */
+	public void changerCouleursTortues(int couleur) {
+		for (TortueVue tortueVue : tortues) {
+			tortueVue.getTortue().setColor(couleur);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void actionsAleatoires() {
+		Random rand = new Random();
+		for (TortueVue tortueVue : tortues) {
+			int action = rand.nextInt(3);
+			int angle = rand.nextInt(90);
+			
+			if(action == 0) {
+				int newX = (int) Math.round(tortueVue.getTortue().getX()+angle*Math.cos(Commun.ratioDegRad*tortueVue.getTortue().getDir()));
+				int newY = (int) Math.round(tortueVue.getTortue().getY()+angle*Math.sin(Commun.ratioDegRad*tortueVue.getTortue().getDir()));
+				if(newX < Commun.LARGEURFEUILLE && newY < Commun.HAUTEURFEUILLE
+				&& newX > 0 && newY > 0)
+					tortueVue.getTortue().avancer(angle);
+				else {
+					tortueVue.getTortue().droite(180);
+					tortueVue.getTortue().avancer(angle);
+				}
+			} else if(action == 1)
+				tortueVue.getTortue().droite(angle);
+			else
+				tortueVue.getTortue().gauche(angle);
 		}
 	}
 	

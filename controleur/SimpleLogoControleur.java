@@ -86,7 +86,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 		else if (c.equals("Couleur")) {
 			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 			int n = cb.getSelectedIndex();
-			logo.getCTortue().setColor(n);
+			logo.getDessin().changerCouleursTortues(n);
 		}
 		else if (c.equals("Quitter")) {
 			System.exit(0);
@@ -119,9 +119,12 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
+		if(!logo.isControle())
+			return;
+		
 		if((e.getKeyCode()==KeyEvent.VK_ENTER)) {
-			logoVue.setFocusable(true);
-			logoVue.requestFocusInWindow();
+			
 		} else if((e.getKeyCode()==KeyEvent.VK_UP)) {
 			this.avancer();
 		} else if((e.getKeyCode()==KeyEvent.VK_LEFT)) {
@@ -132,9 +135,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		
-	}
+	public void keyReleased(KeyEvent e) {}
 	
 	public SimpleLogoVue getLogoVue() {
 		return logoVue;
@@ -142,5 +143,26 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 
 	public void setLogoVue(SimpleLogoVue logoVue) {
 		this.logoVue = logoVue;
+		
+		if(!logo.isControle())
+			lancerLesTortues();
+	}
+
+	private void lancerLesTortues() {
+		
+		Thread t2 = new Thread(new Runnable() {
+			public void run() {
+				while(true) {
+					logo.getDessin().actionsAleatoires();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		t2.start();
+		
 	}
 }
