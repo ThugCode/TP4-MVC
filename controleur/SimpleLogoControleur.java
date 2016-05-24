@@ -5,11 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Random;
 import java.awt.event.KeyListener;
 
 import javax.swing.JComboBox;
 
+import commun.Commun;
 import modele.SimpleLogo;
+import modele.Tortue;
 import vue.SimpleLogoVue;
 
 /**
@@ -87,6 +90,26 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 			int n = cb.getSelectedIndex();
 			logo.getDessin().changerCouleursTortues(n);
+		}
+		else if (c.equals("Ajouter")) {
+			
+			Random rand = new Random();
+			int indexLargeur = rand.nextInt(Commun.LARGEURFEUILLE);
+			int indexHauteur = rand.nextInt(Commun.HAUTEURFEUILLE);
+			
+			Tortue tortue = new Tortue();
+			tortue.setPosition(indexLargeur, indexHauteur);
+			logo.getDessin().addTortue(tortue);
+		} 
+		else if (c.equals("Supprimer")) {
+			if(logo.getDessin().getTortues().size() > 0)
+				logo.getDessin().removeLastTortue();
+		} 
+		else if (c.equals("Aléatoires")) {
+			
+		}
+		else if (c.equals("Contrôlable")) {
+			
 		}
 		else if (c.equals("Quitter")) {
 			System.exit(0);

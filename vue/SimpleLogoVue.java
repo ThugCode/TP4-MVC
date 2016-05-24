@@ -139,14 +139,17 @@ public class SimpleLogoVue extends JFrame implements Observer {
 			toolBar.add(inputValue);
 			
 			toolBar.add(Box.createRigidArea(Commun.HGAP));
+		} else {
+			addButton(toolBar, "Ajouter", "Ajouter", null);
+			addButton(toolBar, "Supprimer", "Supprimer", null);
 		}
 		
 		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
 		
 		if(logo.isControle()) {
-			addButton(toolBar, "Avancer", "Avancer 50", null);
-			addButton(toolBar, "Droite", "Droite 45", null);
-			addButton(toolBar, "Gauche", "Gauche 45", null);
+			addButton(toolBar, "Avancer", "Avancer", null);
+			addButton(toolBar, "Droite", "Droite", null);
+			addButton(toolBar, "Gauche", "Gauche", null);
 			addButton(toolBar, "Lever", "Lever Crayon", null);
 			addButton(toolBar, "Baisser", "Baisser Crayon", null);
 		}
@@ -187,6 +190,11 @@ public class SimpleLogoVue extends JFrame implements Observer {
 			addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
 			addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
 		}
+		
+		JMenu menuCommandes = new JMenu("Mode");
+		menubar.add(menuCommandes);
+		addMenuItem(menuCommandes, "Aléatoires", "Aléatoires", -1);
+		addMenuItem(menuCommandes, "Contrôlable", "Contrôlable", -1);
 		
 		JMenu menuHelp=new JMenu("Aide");
 		menubar.add(menuHelp);

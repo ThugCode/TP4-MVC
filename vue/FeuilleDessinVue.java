@@ -57,6 +57,15 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	}
 	
 	/**
+	 * Supprimer la dernière tortue de la liste
+	 */
+	public void removeLastTortue() {
+		tortues.remove(tortues.size()-1);
+		
+		this.repaint();
+	}
+	
+	/**
 	 * Appel de chaque tortue pour l'afficher
 	 * @param g
 	 */
@@ -91,7 +100,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 		Random rand = new Random();
 		for (TortueVue tortueVue : tortues) {
 			int action = rand.nextInt(3);
-			int angle = rand.nextInt(90);
+			int angle = rand.nextInt(45);
 			
 			if(action == 0) {
 				int newX = (int) Math.round(tortueVue.getTortue().getX()+angle*Math.cos(Commun.ratioDegRad*tortueVue.getTortue().getDir()));
