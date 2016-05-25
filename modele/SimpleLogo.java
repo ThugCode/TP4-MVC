@@ -2,8 +2,6 @@ package modele;
 
 import java.util.Observable;
 
-import vue.FeuilleDessinVue;
-
 /**
  * @author GERLAND - LETOURNEUR
  */
