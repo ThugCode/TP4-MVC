@@ -94,11 +94,11 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 		else if (c.equals("Ajouter")) {
 			TortueRandom tortue = new TortueRandom();
 			tortue.setColor(this.logo.getcCouleur());
-			logo.getDessin().addTortue(tortue);
-		} 
+			logoVue.getDessin().addTortue(tortue);
+			} 
 		else if (c.equals("Supprimer")) {
-			if(logo.getDessin().getTortues().size() > 0)
-				logo.getDessin().removeLastTortue();
+			if(logoVue.getDessin().getTortues().size() > 0)
+				logoVue.getDessin().removeLastTortue();
 		} 
 		else if (c.equals("Aléatoires")) {
 			

@@ -23,10 +23,10 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	/**
 	 * Constructeur
 	 */
-	public FeuilleDessinVue(FeuilleDessinModele m) {
+	public FeuilleDessinVue(FeuilleDessinModele dessin) {
 		tortues = new ArrayList<TortueVue>();
-		dessin = new FeuilleDessinModele();
-		dessin.addObserver(this);
+		this.dessin = dessin;
+		this.dessin.addObserver(this);
 	}
 	
 	/**
@@ -58,6 +58,15 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	}
 	
 	/**
+	 * Supprimer la dernière tortue de la liste
+	 */
+	public void removeLastTortue() {
+		int size = tortues.size()-1;
+		tortues.remove(size);
+		this.dessin.getTortues().remove(size);
+	}
+	
+	/**
 	 * Appel de chaque tortue pour l'afficher
 	 * @param g
 	 */
@@ -83,5 +92,6 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	
 	public ArrayList<TortueVue> getTortues() {
 		return tortues;
-	}
+	}	
+	
 }

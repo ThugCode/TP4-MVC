@@ -278,4 +278,12 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	public void setControleur(SimpleLogoControleur controleur) {
 		this.controleur = controleur;
 	}
+
+	public FeuilleDessinVue getDessin() {
+		return dessin;
+	}
+
+	public void setDessin(FeuilleDessinVue dessin) {
+		this.dessin = dessin;
+	}
 }
