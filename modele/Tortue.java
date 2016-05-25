@@ -201,12 +201,14 @@ public class Tortue extends Observable {
 	 * @param a
 	 */
 	public void spiral(int n, int k, int a) {
+		int colorBefore = coul;
 		for (int i = 0; i < k; i++) {
 			couleur(coul+1);
 			avancer(n);
 			droite(360/a);
 			n = n+1;
 		}
+		coul = colorBefore;
 	}
 	
 	/************

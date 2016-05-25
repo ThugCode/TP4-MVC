@@ -18,12 +18,15 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<TortueVue> tortues;
+	private FeuilleDessinModele dessin;
 
 	/**
 	 * Constructeur
 	 */
-	public FeuilleDessinVue() {
+	public FeuilleDessinVue(FeuilleDessinModele m) {
 		tortues = new ArrayList<TortueVue>();
+		dessin = new FeuilleDessinModele();
+		dessin.addObserver(this);
 	}
 	
 	/**
@@ -47,20 +50,11 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * @param o
 	 */
 	public void addTortue(Tortue o) {
-		TortueTriangleVue tortueVue = new TortueTriangleVue(o);
-		tortues.add(tortueVue);
+		TortueTriangleVue tortue = new TortueTriangleVue(o);
 		o.addObserver(this);
+		tortues.add(tortue);
 		
-		this.repaint();
-	}
-	
-	/**
-	 * Supprimer la dernière tortue de la liste
-	 */
-	public void removeLastTortue() {
-		tortues.remove(tortues.size()-1);
-		
-		this.repaint();
+		dessin.addTortue(o);
 	}
 	
 	/**
@@ -79,24 +73,6 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	public void reset() {
 		for (TortueVue tortueVue : tortues) {
 			tortueVue.getTortue().reset();
-		}
-	}
-	
-	/**
-	 * Changer la couleur de toutes les tortues
-	 */
-	public void changerCouleursTortues(int couleur) {
-		for (TortueVue tortueVue : tortues) {
-			tortueVue.getTortue().setColor(couleur);
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	public void faireAvancerTortues() {
-		for (TortueVue tortueVue : tortues) {
-			((TortueRandom) tortueVue.getTortue()).avancerSeul();
 		}
 	}
 	

@@ -10,7 +10,7 @@ import vue.FeuilleDessinVue;
 public class SimpleLogo extends Observable {
 
 	private Tortue cTortue;
-	private FeuilleDessinVue dessin;
+	private FeuilleDessinModele dessin;
 	private boolean controle;
 	private int cCouleur;
 	
@@ -19,7 +19,7 @@ public class SimpleLogo extends Observable {
 	}
 	
 	public SimpleLogo(boolean p_controle) {
-		dessin = new FeuilleDessinVue();
+		dessin = new FeuilleDessinModele();
 		cTortue = new Tortue();
 		controle = p_controle;
 		cCouleur = 0;
@@ -33,11 +33,11 @@ public class SimpleLogo extends Observable {
 		this.controle = controle;
 	}
 
-	public FeuilleDessinVue getDessin() {
+	public FeuilleDessinModele getDessin() {
 		return dessin;
 	}
 
-	public void setDessin(FeuilleDessinVue dessin) {
+	public void setDessin(FeuilleDessinModele dessin) {
 		this.dessin = dessin;
 	}
 

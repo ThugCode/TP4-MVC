@@ -39,6 +39,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	
 	private SimpleLogo logo;
 	private SimpleLogoControleur controleur;
+	private FeuilleDessinVue dessin;
 	private JTextField inputValue;
 
 	/**
@@ -55,6 +56,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		this.addKeyListener(controleur);
 		
 		logo = p_logo;
+		dessin = new FeuilleDessinVue(logo.getDessin());
 		logo.addObserver(this);
 		
 		logoInit();
@@ -81,19 +83,19 @@ public class SimpleLogoVue extends JFrame implements Observer {
 			procInit();
 		
 		//FEUILLE
-		logo.getDessin().setBackground(Color.red);
-		logo.getDessin().setSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
-		logo.getDessin().setPreferredSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
-		getContentPane().add(logo.getDessin(),"Center");
+		dessin.setBackground(Color.red);
+		dessin.setSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
+		dessin.setPreferredSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
+		getContentPane().add(dessin,"Center");
 		
 		//TORTUE
 		if(logo.isControle()) {
-			logo.getDessin().addTortue(logo.getCTortue());
+			dessin.addTortue(logo.getCTortue());
 		}	
 		else {
 			for(int i = 0; i<1; i++) {
 				TortueRandom tortue = new TortueRandom();
-				logo.getDessin().addTortue(tortue);
+				dessin.addTortue(tortue);
 			}
 		}
 	}
@@ -210,7 +212,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	 * Efface tout et reinitialise la feuille
 	 */
 	public void effacer() {
-		logo.getDessin().reset();
+		dessin.reset();
 	}
 	
 	/**
