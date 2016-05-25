@@ -24,9 +24,7 @@ public class TortueCercleVue extends TortueVue
 	 */
 	public void drawTurtle (Graphics graph) {
 		
-		if (graph==null) {
-			return;
-		}
+		super.drawTurtle(graph);
 		
 		// Dessine les segments
 		for(Segment seg : tortue.getListSegments()) {

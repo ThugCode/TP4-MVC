@@ -3,16 +3,14 @@ package controleur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.Random;
-import java.awt.event.KeyListener;
 
 import javax.swing.JComboBox;
 
-import commun.Commun;
 import modele.SimpleLogo;
-import modele.Tortue;
+import modele.TortueRandom;
 import vue.SimpleLogoVue;
 
 /**
@@ -87,18 +85,15 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 			logoVue.effacer();
 		} 
 		else if (c.equals("Couleur")) {
+			@SuppressWarnings("unchecked")
 			JComboBox<String> cb = (JComboBox<String>)e.getSource();
 			int n = cb.getSelectedIndex();
 			logo.getDessin().changerCouleursTortues(n);
+			logo.setcCouleur(n);
 		}
 		else if (c.equals("Ajouter")) {
-			
-			Random rand = new Random();
-			int indexLargeur = rand.nextInt(Commun.LARGEURFEUILLE);
-			int indexHauteur = rand.nextInt(Commun.HAUTEURFEUILLE);
-			
-			Tortue tortue = new Tortue();
-			tortue.setPosition(indexLargeur, indexHauteur);
+			TortueRandom tortue = new TortueRandom();
+			tortue.setColor(this.logo.getcCouleur());
 			logo.getDessin().addTortue(tortue);
 		} 
 		else if (c.equals("Supprimer")) {
@@ -176,7 +171,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 		Thread t2 = new Thread(new Runnable() {
 			public void run() {
 				while(true) {
-					logo.getDessin().actionsAleatoires();
+					logo.getDessin().faireAvancerTortues();
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {

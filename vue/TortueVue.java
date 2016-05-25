@@ -27,5 +27,16 @@ public abstract class TortueVue
 	 * Dessiner la tortue et ses segments
 	 * @param graph
 	 */
-	public abstract void drawTurtle (Graphics graph);
+	public void drawTurtle (Graphics graph) {
+		
+		if (graph==null) {
+			System.out.println("Impossible de trouver le Graphics pour dessiner la tortue");
+			return;
+		}
+		
+		int tr = 140;
+		int directionArc = 360 - tortue.getDir() - 45;
+		graph.setColor(Color.yellow);
+		graph.fillArc(tortue.getX()-tr/2, tortue.getY()-tr/2, tr, tr, directionArc, 90);
+	}
 }

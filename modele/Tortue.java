@@ -17,7 +17,8 @@ public class Tortue extends Observable {
 	protected int dir;	
 	protected boolean crayon; 
 	protected int coul;
-	
+	protected int vitesse;
+
 	/**
 	 * Constructeur
 	 */
@@ -31,8 +32,8 @@ public class Tortue extends Observable {
 	 * Réinitialiser la tortue
 	 */
 	public void reset() {
-		x = 0;
-		y = 0;
+		x = Commun.LARGEURFEUILLE/2;
+		y = Commun.HAUTEURFEUILLE/2;
 		dir = -90;
 		crayon = true;
 		listSegments.clear();
@@ -222,6 +223,8 @@ public class Tortue extends Observable {
 	
 	public int getColor() {return coul;}
 	
+	public int getVitesse() { return vitesse; }
+	
 	/************
 	 * SETTER
 	 ************/
@@ -229,5 +232,13 @@ public class Tortue extends Observable {
 	public void setColor(int n) {
 		coul = n;
 		notifier();
+	}
+	
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+	
+	public void setVitesse(int vitesse) {
+		this.vitesse = vitesse;
 	}
 }

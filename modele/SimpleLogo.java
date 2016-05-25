@@ -12,6 +12,7 @@ public class SimpleLogo extends Observable {
 	private Tortue cTortue;
 	private FeuilleDessinVue dessin;
 	private boolean controle;
+	private int cCouleur;
 	
 	public SimpleLogo() {
 		this(true);
@@ -21,6 +22,7 @@ public class SimpleLogo extends Observable {
 		dessin = new FeuilleDessinVue();
 		cTortue = new Tortue();
 		controle = p_controle;
+		cCouleur = 0;
 	}
 
 	public boolean isControle() {
@@ -45,5 +47,13 @@ public class SimpleLogo extends Observable {
 
 	public void setCTortue(Tortue courante) {
 		this.cTortue = courante;
+	}
+
+	public int getcCouleur() {
+		return cCouleur;
+	}
+
+	public void setcCouleur(int cCouleur) {
+		this.cCouleur = cCouleur;
 	}
 }

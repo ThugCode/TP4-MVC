@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Event;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -31,7 +29,7 @@ import javax.swing.KeyStroke;
 import commun.Commun;
 import controleur.SimpleLogoControleur;
 import modele.SimpleLogo;
-import modele.Tortue;
+import modele.TortueRandom;
 
 /**
  * @author GERLAND - LETOURNEUR
@@ -89,17 +87,12 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		getContentPane().add(logo.getDessin(),"Center");
 		
 		//TORTUE
-		logo.getCTortue().setPosition(Commun.LARGEURFEUILLE/2, Commun.HAUTEURFEUILLE/2);
-		logo.getDessin().addTortue(logo.getCTortue());
-		
-		if(!logo.isControle()) {
-			Random rand = new Random();
-			for(int i = 0; i<5; i++) {
-				int indexLargeur = rand.nextInt(Commun.LARGEURFEUILLE);
-				int indexHauteur = rand.nextInt(Commun.HAUTEURFEUILLE);
-				
-				Tortue tortue = new Tortue();
-				tortue.setPosition(indexLargeur, indexHauteur);
+		if(logo.isControle()) {
+			logo.getDessin().addTortue(logo.getCTortue());
+		}	
+		else {
+			for(int i = 0; i<1; i++) {
+				TortueRandom tortue = new TortueRandom();
 				logo.getDessin().addTortue(tortue);
 			}
 		}
@@ -218,10 +211,6 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	 */
 	public void effacer() {
 		logo.getDessin().reset();
-
-		// Replace la tortue au centre
-		Dimension size = new Dimension(Commun.LARGEURFEUILLE,Commun.HAUTEURFEUILLE);
-		logo.getCTortue().setPosition(size.width/2, size.height/2);
 	}
 	
 	/**

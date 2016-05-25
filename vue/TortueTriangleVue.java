@@ -25,10 +25,7 @@ public class TortueTriangleVue extends TortueVue
 	 */
 	public void drawTurtle (Graphics graph) {
 		
-		if (graph==null) {
-			System.out.println("Impossible de trouver le Graphics pour dessiner la tortue");
-			return;
-		}
+		super.drawTurtle(graph);
 		
 		// Dessine les segments
 		for(Segment seg : tortue.getListSegments()) {

@@ -6,12 +6,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 
 import javax.swing.JPanel;
 
-import commun.Commun;
-import modele.Tortue;
+import modele.*;
 
 /**
  * @author GERLAND - LETOURNEUR
@@ -49,7 +47,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * @param o
 	 */
 	public void addTortue(Tortue o) {
-		TortueCercleVue tortueVue = new TortueCercleVue(o);
+		TortueTriangleVue tortueVue = new TortueTriangleVue(o);
 		tortues.add(tortueVue);
 		o.addObserver(this);
 		
@@ -96,26 +94,9 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	/**
 	 * 
 	 */
-	public void actionsAleatoires() {
-		Random rand = new Random();
+	public void faireAvancerTortues() {
 		for (TortueVue tortueVue : tortues) {
-			int action = rand.nextInt(3);
-			int angle = rand.nextInt(45);
-			
-			if(action == 0) {
-				int newX = (int) Math.round(tortueVue.getTortue().getX()+angle*Math.cos(Commun.ratioDegRad*tortueVue.getTortue().getDir()));
-				int newY = (int) Math.round(tortueVue.getTortue().getY()+angle*Math.sin(Commun.ratioDegRad*tortueVue.getTortue().getDir()));
-				if(newX < Commun.LARGEURFEUILLE && newY < Commun.HAUTEURFEUILLE
-				&& newX > 0 && newY > 0)
-					tortueVue.getTortue().avancer(angle);
-				else {
-					tortueVue.getTortue().droite(180);
-					tortueVue.getTortue().avancer(angle);
-				}
-			} else if(action == 1)
-				tortueVue.getTortue().droite(angle);
-			else
-				tortueVue.getTortue().gauche(angle);
+			((TortueRandom) tortueVue.getTortue()).avancerSeul();
 		}
 	}
 	
