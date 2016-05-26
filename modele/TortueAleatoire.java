@@ -28,7 +28,7 @@ public class TortueAleatoire extends Tortue {
 		Random rand = new Random();
 		x = rand.nextInt(Commun.LARGEUR_FEUILLE);
 		y = rand.nextInt(Commun.HAUTEUR_FEUILLE);
-		vitesse = rand.nextInt(60);
+		vitesse = rand.nextInt(Commun.VITESSE_MAXIMUM);
 		direction = rand.nextInt(360)+1;
 		
 		notifier();

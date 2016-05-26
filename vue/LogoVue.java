@@ -54,6 +54,7 @@ public class LogoVue extends JFrame implements Observer {
 		controleur = p_logoControleur;
 		this.addWindowListener(controleur);
 		this.addKeyListener(controleur);
+		this.addComponentListener(controleur);
 		
 		logo = p_logo;
 		dessin = new FeuilleDessinVue(logo.getDessin());

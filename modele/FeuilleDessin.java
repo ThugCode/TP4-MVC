@@ -70,14 +70,35 @@ public class FeuilleDessin extends Observable{
 	 * 
 	 */
 	public void faireAvancerTortuesIntelligentes() {
+		
+		ArrayList<Tortue> listesTortue = new ArrayList<Tortue>();
 		for (Tortue tortue : tortues) {
+			
+			listesTortue.clear();
+			
 			for (Tortue autreTortue : tortues) {
 				
 				if(tortue.equals(autreTortue)) continue;
 				
 				if(((TortueIntelligente) tortue).getChampVision().estDansLePolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
-					
+					listesTortue.add(autreTortue);
 				}
+			}
+			
+			if(listesTortue.size() > 0) {
+				int cpt = 0;
+				int directionAutre = 0;
+				int vitesseAutre = 0;
+				for(Tortue tortueASuivre : listesTortue) {
+					cpt++;
+					directionAutre += tortueASuivre.getDirection();
+					vitesseAutre += tortueASuivre.getVitesse();
+				}
+				directionAutre /= cpt;
+				vitesseAutre /= cpt;
+				
+				tortue.setDirection(directionAutre);
+				tortue.setVitesse(vitesseAutre);
 			}
 			
 			((TortueIntelligente) tortue).avancerIntelligement();

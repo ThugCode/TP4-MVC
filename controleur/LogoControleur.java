@@ -2,6 +2,8 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -9,6 +11,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JComboBox;
 
+import commun.Commun;
 import modele.Logo;
 import modele.TortueIntelligente;
 import vue.LogoVue;
@@ -16,10 +19,18 @@ import vue.LogoVue;
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class LogoControleur implements ActionListener, WindowListener, KeyListener {
+public class LogoControleur implements ActionListener, WindowListener, KeyListener, ComponentListener {
 
 	private Logo logo;
 	private LogoVue logoVue;
+	
+	public LogoVue getLogoVue() {
+		return logoVue;
+	}
+
+	public void setLogoVue(LogoVue logoVue) {
+		this.logoVue = logoVue;
+	}
 
 	/**
 	 * Constructeur
@@ -160,12 +171,20 @@ public class LogoControleur implements ActionListener, WindowListener, KeyListen
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
-	
-	public LogoVue getLogoVue() {
-		return logoVue;
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		
+		Commun.LARGEUR_FEUILLE = ((LogoVue) e.getSource()).getWidth();
+		Commun.HAUTEUR_FEUILLE = ((LogoVue)e.getSource()).getHeight();
 	}
 
-	public void setLogoVue(LogoVue logoVue) {
-		this.logoVue = logoVue;
-	}
+	@Override
+	public void componentMoved(ComponentEvent e) {}
+
+	@Override
+	public void componentShown(ComponentEvent e) {}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {}
 }

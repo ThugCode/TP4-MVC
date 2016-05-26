@@ -14,6 +14,8 @@ public class Commun {
 	public static final Dimension VGAP = new Dimension(1,5);
 	public static final Dimension HGAP = new Dimension(5,1);
 	
-	public static final int LARGEUR_FEUILLE = 600;
-	public static final int HAUTEUR_FEUILLE = 400;
+	public static int LARGEUR_FEUILLE = 600;
+	public static int HAUTEUR_FEUILLE = 400;
+	
+	public static final int VITESSE_MAXIMUM = 40;
 }
