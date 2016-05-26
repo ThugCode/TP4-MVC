@@ -53,7 +53,7 @@ public class Tortue extends Observable {
 	/**
 	 * Notifier la vue
 	 */
-	public void notifier() {
+	protected void notifier() {
 		setChanged();
 		notifyObservers();
 	}

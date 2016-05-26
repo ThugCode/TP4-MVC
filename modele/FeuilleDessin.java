@@ -4,12 +4,20 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class FeuilleDessinModele extends Observable{
+public class FeuilleDessin extends Observable{
 
 	private ArrayList<Tortue> tortues;
 
-	public FeuilleDessinModele() {
+	public FeuilleDessin() {
 		tortues = new ArrayList<Tortue>();
+	}
+	
+	/**
+	 * Notifier la vue
+	 */
+	private void notifier() {
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
@@ -25,21 +33,28 @@ public class FeuilleDessinModele extends Observable{
 	 * Ajouter une tortue sur la feuille de dessin
 	 * @param o
 	 */
-	public void addTortue(Tortue o) {
-		tortues.add(o);
-		
-		setChanged();
-		notifyObservers();
+	public void ajouterTortue(Tortue tortue) {
+		tortues.add(tortue);
+		notifier();
 	}
 	
 	/**
 	 * Supprimer la dernière tortue de la liste
 	 */
-	public void removeLastTortue() {
-		tortues.remove(tortues.size()-1);	
+	public void retirerDerniereTortue() {
 		
-		setChanged();
-		notifyObservers();
+		if(tortues.size() > 0)
+			tortues.remove(tortues.size()-1);
+		notifier();
+	}
+	
+	/**
+	 * 
+	 */
+	public void reset() {
+		for (Tortue tortue : tortues) {
+			tortue.reset();
+		}
 	}
 	
 	/**
@@ -60,7 +75,7 @@ public class FeuilleDessinModele extends Observable{
 				
 				if(tortue.equals(autreTortue)) continue;
 				
-				if(((TortueIntelligente) tortue).getChampVision().isInPolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
+				if(((TortueIntelligente) tortue).getChampVision().estDansLePolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
 					
 				}
 			}

@@ -41,9 +41,9 @@ public class TortueHexaVue extends TortueVue
 		//Angle de la droite
 		double theta=Commun.RATIO_DEG_RAD*(-tortue.getDirection());
 		//Demi angle au sommet du triangle
-		double alpha=Math.atan( (float)Commun.rb / (float)Commun.rp );
+		double alpha=Math.atan( (float)Commun.TAILLE_BASE / (float)Commun.TAILLE_POINTE );
 		//Rayon de la fleche
-		double r=Math.sqrt( Commun.rp*Commun.rp + Commun.rb*Commun.rb );
+		double r=Math.sqrt( Commun.TAILLE_POINTE*Commun.TAILLE_POINTE + Commun.TAILLE_BASE*Commun.TAILLE_BASE );
 		//Sens de la fleche
 
 		//Pointe

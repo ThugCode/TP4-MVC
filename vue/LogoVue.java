@@ -27,18 +27,18 @@ import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import commun.Commun;
-import controleur.SimpleLogoControleur;
-import modele.SimpleLogo;
+import controleur.LogoControleur;
+import modele.Logo;
 import modele.TortueIntelligente;
 
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class SimpleLogoVue extends JFrame implements Observer {
+public class LogoVue extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	
-	private SimpleLogo logo;
-	private SimpleLogoControleur controleur;
+	private Logo logo;
+	private LogoControleur controleur;
 	private FeuilleDessinVue dessin;
 	private JTextField inputValue;
 
@@ -47,7 +47,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	 * @param p_logo
 	 * @param p_logoControleur
 	 */
-	public SimpleLogoVue(SimpleLogo p_logo, SimpleLogoControleur p_logoControleur) {
+	public LogoVue(Logo p_logo, LogoControleur p_logoControleur) {
 		
 		super("Un logo par GERLAND Loïc et LETOURNEUR Léo");
 		
@@ -90,12 +90,12 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		
 		//TORTUE
 		if(logo.isControle()) {
-			dessin.addTortue(logo.getCTortue());
+			dessin.ajouterTortue(logo.getCTortue());
 		}	
 		else {
 			for(int i = 0; i<1; i++) {
 				TortueIntelligente tortue = new TortueIntelligente();
-				dessin.addTortue(tortue);
+				dessin.ajouterTortue(tortue);
 			}
 		}
 	}
@@ -135,6 +135,8 @@ public class SimpleLogoVue extends JFrame implements Observer {
 			
 			toolBar.add(Box.createRigidArea(Commun.HGAP));
 		} else {
+			addButton(toolBar, "Lancer", "Lancer", null);
+			addButton(toolBar, "Stopper", "Stopper", null);
 			addButton(toolBar, "Ajouter", "Ajouter", null);
 			addButton(toolBar, "Supprimer", "Supprimer", null);
 		}
@@ -209,13 +211,6 @@ public class SimpleLogoVue extends JFrame implements Observer {
 	}
 	
 	/**
-	 * Efface tout et reinitialise la feuille
-	 */
-	public void effacer() {
-		dessin.reset();
-	}
-	
-	/**
 	 * Utilitaires pour installer des boutons
 	 * @param p
 	 * @param name
@@ -271,11 +266,11 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		this.repaint();		
 	}
 	
-	public SimpleLogoControleur getControleur() {
+	public LogoControleur getControleur() {
 		return controleur;
 	}
 
-	public void setControleur(SimpleLogoControleur controleur) {
+	public void setControleur(LogoControleur controleur) {
 		this.controleur = controleur;
 	}
 

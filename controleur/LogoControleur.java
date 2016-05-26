@@ -9,23 +9,23 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JComboBox;
 
-import modele.SimpleLogo;
+import modele.Logo;
 import modele.TortueIntelligente;
-import vue.SimpleLogoVue;
+import vue.LogoVue;
 
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class SimpleLogoControleur implements ActionListener, WindowListener, KeyListener {
+public class LogoControleur implements ActionListener, WindowListener, KeyListener {
 
-	private SimpleLogo logo;
-	private SimpleLogoVue logoVue;
+	private Logo logo;
+	private LogoVue logoVue;
 
 	/**
 	 * Constructeur
 	 * @param p_logo
 	 */
-	public SimpleLogoControleur(SimpleLogo p_logo) {
+	public LogoControleur(Logo p_logo) {
 		logo = p_logo;
 	}
 	
@@ -53,6 +53,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 	/**
 	 * ActionPerformed
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String c = e.getActionCommand();
@@ -82,23 +83,28 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 			logo.getCTortue().spiral(50,40,6);
 		} 
 		else if (c.equals("Effacer")) {
-			logoVue.effacer();
+			logo.getDessin().reset();
 		} 
 		else if (c.equals("Couleur")) {
-			@SuppressWarnings("unchecked")
-			JComboBox<String> cb = (JComboBox<String>)e.getSource();
-			int n = cb.getSelectedIndex();
-			logo.getDessin().changerCouleursTortues(n);
-			logo.setcCouleur(n);
+			logo.setcCouleur(((JComboBox<String>)e.getSource()).getSelectedIndex());
+		}
+		else if (c.equals("Lancer")) {
+			logo.lancerLesTortues();
+		}
+		else if (c.equals("Stopper")) {
+			logo.setMarche(false);
 		}
 		else if (c.equals("Ajouter")) {
+			
 			TortueIntelligente tortue = new TortueIntelligente();
-			tortue.setCouleur(this.logo.getcCouleur());
-			logoVue.getDessin().addTortue(tortue);
+			tortue.setCouleur(logo.getcCouleur());
+			
+			logoVue.getDessin().ajouterTortue(tortue);
 		} 
 		else if (c.equals("Supprimer")) {
-			if(logoVue.getDessin().getTortues().size() > 0)
-				logoVue.getDessin().removeLastTortue();
+			
+			logoVue.getDessin().retirerDerniereTortue();
+			logo.getDessin().retirerDerniereTortue();
 		} 
 		else if (c.equals("Aléatoires")) {
 			
@@ -155,32 +161,11 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 	@Override
 	public void keyReleased(KeyEvent e) {}
 	
-	public SimpleLogoVue getLogoVue() {
+	public LogoVue getLogoVue() {
 		return logoVue;
 	}
 
-	public void setLogoVue(SimpleLogoVue logoVue) {
+	public void setLogoVue(LogoVue logoVue) {
 		this.logoVue = logoVue;
-		
-		if(!logo.isControle())
-			lancerLesTortues();
-	}
-
-	private void lancerLesTortues() {
-		
-		Thread t2 = new Thread(new Runnable() {
-			public void run() {
-				while(true) {
-					logo.getDessin().faireAvancerTortuesIntelligentes();
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		t2.start();
-		
 	}
 }

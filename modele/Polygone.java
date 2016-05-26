@@ -17,33 +17,33 @@ public class Polygone {
 	}
 	
 	/**
-	 * Verify if a point "test" is in the same side of the point "witness"
-	 * by cutting plan in two with segment first to second
+	 * Vérifie si le point "test" est du même côté que le point "witness"
+	 * en coupant en deux le plan avec la droite coupant les points P-S
 	 * @param test
-	 * @param first
-	 * @param second
-	 * @param witness
+	 * @param P
+	 * @param S
+	 * @param temoin
 	 * @return
 	 */
-	private boolean verifySegment(Point test, Point first, Point second, Point witness) {
+	private boolean verifierDroite(Point test, Point P, Point S, Point temoin) {
 		
-		//Slope between point first and second
-		float slope = 0;
-		if(second.x-first.x == 0)
-			slope = ((float)second.y-(float)first.y) * Integer.MIN_VALUE;
+		//Pente de la droite PS
+		float pente = 0;
+		if(S.x-P.x == 0)
+			pente = ((float)S.y-(float)P.y) * Integer.MIN_VALUE;
 		else 
-			slope = ((float)second.y-(float)first.y) / ((float)second.x-(float)first.x);
+			pente = ((float)S.y-(float)P.y) / ((float)S.x-(float)P.x);
 		
-		//Intercept
-		float intercept = -slope*(float)first.x + (float)first.y;
+		//Ordonnée à l'origine
+		float ordonnee = -pente*(float)P.x + (float)P.y;
 		
-		//Calculate y for witness and test points on segment
-		float yWitnessInSegment = (float)witness.x*slope + intercept;
-		float yTestInSegment = (float)test.x*slope + intercept;
+		//Calcul du y témoin et test sur la droite
+		float yTemoinSurDroite = (float)temoin.x*pente + ordonnee;
+		float yTestSurDroite = (float)test.x*pente + ordonnee;
 		
-		//Check if points are in the same side
-		if( (yWitnessInSegment < witness.y && yTestInSegment < test.y) 
-		 || (yWitnessInSegment > witness.y && yTestInSegment > test.y)) {
+		//Verification des points (quel côté de la droite)
+		if( (yTemoinSurDroite < temoin.y && yTestSurDroite < test.y) 
+		 || (yTemoinSurDroite > temoin.y && yTestSurDroite > test.y)) {
 			return true;
 		}
 		
@@ -51,17 +51,16 @@ public class Polygone {
 	}
 	
 	/**
-	 * Verify if the point x is in the polygone
+	 * Verifie si le point x est dans le polygone
 	 * @param x
 	 * @return
 	 */
-	public boolean isInPolygone(Point x) {
+	public boolean estDansLePolygone(Point x) {
 		
-		//Check if the point is on the appropriate side of the segment
-		return verifySegment(x, this.a, this.b, this.c) 
-			&& verifySegment(x, this.b, this.c, this.d) 
-			&& verifySegment(x, this.c, this.d, this.a)
-			&& verifySegment(x, this.d, this.a, this.b);
+		return verifierDroite(x, this.a, this.b, this.c) 
+			&& verifierDroite(x, this.b, this.c, this.d) 
+			&& verifierDroite(x, this.c, this.d, this.a)
+			&& verifierDroite(x, this.d, this.a, this.b);
 	}
 
 	/***************

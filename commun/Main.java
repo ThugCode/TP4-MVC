@@ -3,9 +3,9 @@ package commun;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import controleur.SimpleLogoControleur;
-import modele.SimpleLogo;
-import vue.SimpleLogoVue;
+import controleur.LogoControleur;
+import modele.Logo;
+import vue.LogoVue;
 
 public class Main {
 
@@ -27,9 +27,9 @@ public class Main {
 			    if(rang == 1)
 			    	controle = false;
 			    
-				SimpleLogo logo = new SimpleLogo(controle);
-				SimpleLogoControleur logoControleur = new SimpleLogoControleur(logo);
-				SimpleLogoVue logoVue = new SimpleLogoVue(logo, logoControleur);
+				Logo logo = new Logo(controle);
+				LogoControleur logoControleur = new LogoControleur(logo);
+				LogoVue logoVue = new LogoVue(logo, logoControleur);
 				
 				logoControleur.setLogoVue(logoVue);				
 				

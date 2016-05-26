@@ -18,12 +18,12 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<TortueVue> tortues;
-	private FeuilleDessinModele dessin;
+	private FeuilleDessin dessin;
 
 	/**
 	 * Constructeur
 	 */
-	public FeuilleDessinVue(FeuilleDessinModele dessin) {
+	public FeuilleDessinVue(FeuilleDessin dessin) {
 		tortues = new ArrayList<TortueVue>();
 		this.dessin = dessin;
 		this.dessin.addObserver(this);
@@ -49,21 +49,20 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * Ajouter une tortue sur la feuille de dessin
 	 * @param o
 	 */
-	public void addTortue(Tortue o) {
-		TortueTriangleVue tortue = new TortueTriangleVue(o);
-		o.addObserver(this);
-		tortues.add(tortue);
-		
-		dessin.addTortue(o);
+	public void ajouterTortue(Tortue tortue) {
+		TortueTriangleVue tortueVue = new TortueTriangleVue(tortue);
+		tortue.addObserver(this);
+		tortues.add(tortueVue);
+		dessin.ajouterTortue(tortue);
 	}
 	
 	/**
 	 * Supprimer la dernière tortue de la liste
 	 */
-	public void removeLastTortue() {
-		int size = tortues.size()-1;
-		tortues.remove(size);
-		this.dessin.getTortues().remove(size);
+	public void retirerDerniereTortue() {
+		
+		if(tortues.size() > 0)
+			tortues.remove(tortues.size()-1);
 	}
 	
 	/**
@@ -73,15 +72,6 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	public void showTurtles(Graphics g) {
 		for(TortueVue tortueVue : tortues) {
 			tortueVue.drawTurtle(g);
-		}
-	}
-
-	/**
-	 * Réinitialisation des tortues
-	 */
-	public void reset() {
-		for (TortueVue tortueVue : tortues) {
-			tortueVue.getTortue().reset();
 		}
 	}
 	
