@@ -1,6 +1,5 @@
 package modele;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import commun.Commun;
@@ -8,17 +7,15 @@ import commun.Commun;
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class TortueRandom extends Tortue {
+public class TortueAleatoire extends Tortue {
 
 	protected int vitesse;
 
 	/**
 	 * Constructeur
 	 */
-	public TortueRandom() { 
-		listSegments = new ArrayList<Segment>();
-		coul = 0;
-		reset();
+	public TortueAleatoire() { 
+		super();
 	}
 
 	/**
@@ -29,21 +26,25 @@ public class TortueRandom extends Tortue {
 		super.reset();
 		
 		Random rand = new Random();
-		x = rand.nextInt(Commun.LARGEURFEUILLE);
-		y = rand.nextInt(Commun.HAUTEURFEUILLE);
+		x = rand.nextInt(Commun.LARGEUR_FEUILLE);
+		y = rand.nextInt(Commun.HAUTEUR_FEUILLE);
 		vitesse = rand.nextInt(60);
-		dir = rand.nextInt(360)+1;
+		direction = rand.nextInt(360)+1;
 		
 		notifier();
   	}
 	
+	/**
+	 * Avancer la tortue grâce à sa vitesse
+	 */
 	public void avancerSeul() {
 		
 		this.avancer(this.vitesse);
 		
+		//La position reste dans l'écran
 		this.setPosition(
-				Math.floorMod(this.getX(), Commun.LARGEURFEUILLE),
-				Math.floorMod(this.getY(), Commun.HAUTEURFEUILLE));
+				Math.floorMod(this.getX(), Commun.LARGEUR_FEUILLE),
+				Math.floorMod(this.getY(), Commun.HAUTEUR_FEUILLE));
 		
 		notifier();
 	}

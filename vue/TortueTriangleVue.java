@@ -39,7 +39,7 @@ public class TortueTriangleVue extends TortueVue
 
 		//Calcule des deux bases
 		//Angle de la droite
-		double theta=Commun.ratioDegRad*(-tortue.getDir());
+		double theta=Commun.RATIO_DEG_RAD*(-tortue.getDirection());
 		//Demi angle au sommet du triangle
 		double alpha=Math.atan( (float)Commun.rb / (float)Commun.rp );
 		//Rayon de la fleche
@@ -58,7 +58,7 @@ public class TortueTriangleVue extends TortueVue
 		  (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
 
 		arrow.addPoint(p2.x,p2.y);
-		graph.setColor(tortue.decodeColor(tortue.getColor()));
+		graph.setColor(tortue.decodeColor(tortue.getCouleur()));
 		graph.fillPolygon(arrow);
     }
 }

@@ -32,7 +32,7 @@ public class TortueCercleVue extends TortueVue
 		}
 
 		Point p = new Point(tortue.getX(),tortue.getY());
-		graph.setColor(tortue.decodeColor(tortue.getColor()));
+		graph.setColor(tortue.decodeColor(tortue.getCouleur()));
 		graph.fillOval(p.x-5,p.y-5, 10, 10);
     }
 }

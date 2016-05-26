@@ -13,9 +13,9 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 
-				String[] boutons = {"Contrôle", "Tortue aléatoire"};
+				String[] boutons = {"Tortue controlable", "Tortues intelligentes"};
 			    int rang = JOptionPane.showOptionDialog(null, 
-			      "Vous pouvez utiliser une tortue et la contrôler ou vous pouvez avoir plusieurs tortues aléatoires",
+			      "Tortues intelligentes ou tortue controlable ?",
 			      "Choix du type",
 			      JOptionPane.YES_NO_CANCEL_OPTION,
 			      JOptionPane.QUESTION_MESSAGE,

@@ -12,19 +12,19 @@ import commun.Commun;
  */
 public class Tortue extends Observable {
 
-	protected ArrayList<Segment> listSegments;
-	protected int x, y;	
-	protected int dir;	
-	protected boolean crayon; 
-	protected int coul;
+	protected int x, y;							//Coordonées
+	protected int direction;					//Direction entre -360 et 360
+	protected boolean crayon;					//Crayon baissé ou levé
+	protected int couleur;
 	protected int vitesse;
+	protected ArrayList<Segment> listeSegments;
 
 	/**
 	 * Constructeur
 	 */
-	public Tortue() { 
-		listSegments = new ArrayList<Segment>();
-		coul = 0;
+	public Tortue() {
+		couleur = 0;
+		listeSegments = new ArrayList<Segment>();
 		reset();
 	}
 
@@ -32,11 +32,11 @@ public class Tortue extends Observable {
 	 * Réinitialiser la tortue
 	 */
 	public void reset() {
-		x = Commun.LARGEURFEUILLE/2;
-		y = Commun.HAUTEURFEUILLE/2;
-		dir = -90;
+		x = Commun.LARGEUR_FEUILLE/2;
+		y = Commun.HAUTEUR_FEUILLE/2;
+		direction = -90;
 		crayon = true;
-		listSegments.clear();
+		listeSegments.clear();
 		
 		notifier();
   	}
@@ -99,8 +99,9 @@ public class Tortue extends Observable {
 	 */
 	public void avancer(int dist) {
 		
-		int newX = (int) Math.round(x+dist*Math.cos(Commun.ratioDegRad*dir));
-		int newY = (int) Math.round(y+dist*Math.sin(Commun.ratioDegRad*dir));
+		//Coordonnées du point d'arrivé
+		int newX = (int) Math.round(x+dist*Math.cos(Commun.RATIO_DEG_RAD*direction));
+		int newY = (int) Math.round(y+dist*Math.sin(Commun.RATIO_DEG_RAD*direction));
 		
 		if (crayon) {
 			Segment seg = new Segment();
@@ -109,9 +110,9 @@ public class Tortue extends Observable {
 			seg.getPtStart().y = y;
 			seg.getPtEnd().x = newX;
 			seg.getPtEnd().y = newY;
-			seg.setColor(decodeColor(coul));
+			seg.setColor(decodeColor(couleur));
 	
-			listSegments.add(seg);
+			listeSegments.add(seg);
 		}
 
 		x = newX;
@@ -125,7 +126,7 @@ public class Tortue extends Observable {
 	 * @param ang
 	 */
 	public void droite(int ang) {
-		dir = (dir + ang) % 360;
+		direction = (direction + ang) % 360;
 		notifier();
 	}
 
@@ -134,7 +135,7 @@ public class Tortue extends Observable {
 	 * @param ang
 	 */
 	public void gauche(int ang) {
-		dir = (dir - ang) % 360;
+		direction = (direction - ang) % 360;
 		notifier();
 	}
 
@@ -159,7 +160,7 @@ public class Tortue extends Observable {
 	 * @param n
 	 */
 	public void couleur(int n) {
-		coul = n % 12;
+		couleur = n % 12;
 		notifier();
 	}
 
@@ -167,7 +168,7 @@ public class Tortue extends Observable {
 	 * Incrémente la couleur de 1
 	 */
 	public void couleurSuivante() {
-	 	couleur(coul+1);
+	 	couleur(couleur+1);
 	 	notifier();
 	}
 	
@@ -201,29 +202,29 @@ public class Tortue extends Observable {
 	 * @param a
 	 */
 	public void spiral(int n, int k, int a) {
-		int colorBefore = coul;
+		int colorBefore = couleur;
 		for (int i = 0; i < k; i++) {
-			couleur(coul+1);
+			couleur(couleur+1);
 			avancer(n);
 			droite(360/a);
 			n = n+1;
 		}
-		coul = colorBefore;
+		couleur = colorBefore;
 	}
 	
 	/************
 	 * GETTER
 	 ************/
 	
-	public ArrayList<Segment> getListSegments() { return listSegments; }
+	public ArrayList<Segment> getListSegments() { return listeSegments; }
 
 	public int getX() { return x; }
 	
 	public int getY() { return y; }
 	
-	public int getDir() { return dir; }
+	public int getDirection() { return direction; }
 	
-	public int getColor() {return coul;}
+	public int getCouleur() {return couleur;}
 	
 	public int getVitesse() { return vitesse; }
 	
@@ -231,13 +232,13 @@ public class Tortue extends Observable {
 	 * SETTER
 	 ************/
 	
-	public void setColor(int n) {
-		coul = n;
+	public void setCouleur(int n) {
+		couleur = n;
 		notifier();
 	}
 	
-	public void setDir(int dir) {
-		this.dir = dir;
+	public void setDirection(int dir) {
+		this.direction = dir;
 	}
 	
 	public void setVitesse(int vitesse) {

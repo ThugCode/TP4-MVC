@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -16,7 +17,7 @@ public class FeuilleDessinModele extends Observable{
 	 */
 	public void changerCouleursTortues(int couleur) {
 		for (Tortue tortue : tortues) {
-			tortue.setColor(couleur);
+			tortue.setCouleur(couleur);
 		}
 	}
 	
@@ -46,13 +47,25 @@ public class FeuilleDessinModele extends Observable{
 	 */
 	public void faireAvancerTortues() {
 		for (Tortue tortue : tortues) {
-			((TortueRandom) tortue).avancerSeul();
+			((TortueAleatoire) tortue).avancerSeul();
 		}
 	}
 	
-	public void faireAvancerTortuesSmart() {
+	/**
+	 * 
+	 */
+	public void faireAvancerTortuesIntelligentes() {
 		for (Tortue tortue : tortues) {
-			((TortueSmart) tortue).avancerSmart(this.tortues);
+			for (Tortue autreTortue : tortues) {
+				
+				if(tortue.equals(autreTortue)) continue;
+				
+				if(((TortueIntelligente) tortue).getChampVision().isInPolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
+					
+				}
+			}
+			
+			((TortueIntelligente) tortue).avancerIntelligement();
 		}
 	}
 	

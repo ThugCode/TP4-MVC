@@ -10,7 +10,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JComboBox;
 
 import modele.SimpleLogo;
-import modele.TortueRandom;
+import modele.TortueIntelligente;
 import vue.SimpleLogoVue;
 
 /**
@@ -92,10 +92,10 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 			logo.setcCouleur(n);
 		}
 		else if (c.equals("Ajouter")) {
-			TortueRandom tortue = new TortueRandom();
-			tortue.setColor(this.logo.getcCouleur());
+			TortueIntelligente tortue = new TortueIntelligente();
+			tortue.setCouleur(this.logo.getcCouleur());
 			logoVue.getDessin().addTortue(tortue);
-			} 
+		} 
 		else if (c.equals("Supprimer")) {
 			if(logoVue.getDessin().getTortues().size() > 0)
 				logoVue.getDessin().removeLastTortue();
@@ -171,7 +171,7 @@ public class SimpleLogoControleur implements ActionListener, WindowListener, Key
 		Thread t2 = new Thread(new Runnable() {
 			public void run() {
 				while(true) {
-					logo.getDessin().faireAvancerTortues();
+					logo.getDessin().faireAvancerTortuesIntelligentes();
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {

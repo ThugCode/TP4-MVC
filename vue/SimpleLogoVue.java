@@ -29,7 +29,7 @@ import javax.swing.KeyStroke;
 import commun.Commun;
 import controleur.SimpleLogoControleur;
 import modele.SimpleLogo;
-import modele.TortueRandom;
+import modele.TortueIntelligente;
 
 /**
  * @author GERLAND - LETOURNEUR
@@ -84,8 +84,8 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		
 		//FEUILLE
 		dessin.setBackground(Color.red);
-		dessin.setSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
-		dessin.setPreferredSize(new Dimension(Commun.LARGEURFEUILLE, Commun.HAUTEURFEUILLE));
+		dessin.setSize(new Dimension(Commun.LARGEUR_FEUILLE, Commun.HAUTEUR_FEUILLE));
+		dessin.setPreferredSize(new Dimension(Commun.LARGEUR_FEUILLE, Commun.HAUTEUR_FEUILLE));
 		getContentPane().add(dessin,"Center");
 		
 		//TORTUE
@@ -94,7 +94,7 @@ public class SimpleLogoVue extends JFrame implements Observer {
 		}	
 		else {
 			for(int i = 0; i<1; i++) {
-				TortueRandom tortue = new TortueRandom();
+				TortueIntelligente tortue = new TortueIntelligente();
 				dessin.addTortue(tortue);
 			}
 		}
