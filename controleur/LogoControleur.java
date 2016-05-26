@@ -176,7 +176,7 @@ public class LogoControleur implements ActionListener, WindowListener, KeyListen
 	public void componentResized(ComponentEvent e) {
 		
 		Commun.LARGEUR_FEUILLE = ((LogoVue) e.getSource()).getWidth();
-		Commun.HAUTEUR_FEUILLE = ((LogoVue)e.getSource()).getHeight();
+		Commun.HAUTEUR_FEUILLE = ((LogoVue)e.getSource()).getHeight()-95;
 	}
 
 	@Override
