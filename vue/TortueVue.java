@@ -46,7 +46,7 @@ public abstract class TortueVue
 			graph.setColor(Color.yellow);
 			graph.fillArc(arcX, arcY, Commun.LONGUEUR_VUE, Commun.LONGUEUR_VUE, arcDirection, Commun.ANGLE_VUE);
 		}
-		
+		/*
 		//Display point of the arc
 		if(tortue instanceof TortueIntelligente && ((TortueIntelligente)tortue).getChampVision() != null) {
 			graph.setColor(Color.green);
@@ -55,5 +55,6 @@ public abstract class TortueVue
 			graph.fillRect(((TortueIntelligente)tortue).getChampVision().getC().x, ((TortueIntelligente)tortue).getChampVision().getC().y, 5, 5);
 			graph.fillRect(((TortueIntelligente)tortue).getChampVision().getD().x, ((TortueIntelligente)tortue).getChampVision().getD().y, 5, 5);
 		}
+		*/
 	}
 }

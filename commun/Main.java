@@ -1,5 +1,8 @@
 package commun;
 
+import java.io.File;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -13,15 +16,21 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 
+				String filePath = new File("").getAbsolutePath();
+				filePath += "/ressources/tortue.png";
+				
 				String[] boutons = {"Tortue controlable", "Tortues intelligentes"};
 			    int rang = JOptionPane.showOptionDialog(null, 
 			      "Tortues intelligentes ou tortue controlable ?",
 			      "Choix du type",
-			      JOptionPane.YES_NO_CANCEL_OPTION,
+			      JOptionPane.YES_NO_OPTION,
 			      JOptionPane.QUESTION_MESSAGE,
-			      null,
+			      new ImageIcon(filePath),
 			      boutons,
 			      boutons[1]);
+			    
+			    if(rang == -1)
+			    	System.exit(0);
 			    
 			    boolean controle = true;
 			    if(rang == 1)
