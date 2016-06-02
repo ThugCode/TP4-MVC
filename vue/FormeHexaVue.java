@@ -15,7 +15,7 @@ public class FormeHexaVue implements FormeVue
 	@Override
 	public void dessinerTortue(Graphics graph, Tortue tortue) {
 		
-		int nombreDeCotes = 8;
+		int nombreDeCotes = 6;
 		float angle = 360/nombreDeCotes;
 		
 		int aX = (int) Math.round(tortue.getX()+Commun.TAILLE_POINTE*Math.cos(Commun.RATIO_DEG_RAD*tortue.getDirection()));
