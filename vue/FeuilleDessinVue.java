@@ -50,7 +50,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * @param o
 	 */
 	public void ajouterTortue(Tortue tortue) {
-		TortueTriangleVue tortueVue = new TortueTriangleVue(tortue);
+		TortueVue tortueVue = new TortueVue(tortue);
 		tortue.addObserver(this);
 		tortues.add(tortueVue);
 		dessin.ajouterTortue(tortue);
@@ -71,7 +71,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 */
 	public void showTurtles(Graphics g) {
 		for(TortueVue tortueVue : tortues) {
-			tortueVue.drawTurtle(g);
+			tortueVue.dessinerTortue(g);
 		}
 	}
 	

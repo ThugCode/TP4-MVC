@@ -1,37 +1,19 @@
 package vue;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Polygon;
 
 import commun.Commun;
-import modele.Segment;
 import modele.Tortue;
 
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class TortueHexaVue extends TortueVue
-{	
-	/**
-	 * Constructeur
-	 * @param p_tortue
-	 */
-	public TortueHexaVue(Tortue p_tortue) {
-		super(p_tortue);
-	}
-	
-	/**
-	 * Dessiner la tortue et ses segments
-	 * @param graph
-	 */
-	public void drawTurtle (Graphics graph) {
-		
-		super.drawTurtle(graph);
-		
-		// Dessine les segments
-		for(Segment seg : tortue.getListSegments()) {
-			seg.drawSegment(graph);
-		}
-
+public class FormeHexaVue implements FormeVue
+{
+	@Override
+	public void dessinerTortue(Graphics graph, Tortue tortue) {
 		//Calcule les 3 coins du triangle a partir de
 		// la position de la tortue p
 		Point p = new Point(tortue.getX(),tortue.getY());
@@ -60,5 +42,6 @@ public class TortueHexaVue extends TortueVue
 		arrow.addPoint(p2.x,p2.y);
 		graph.setColor(tortue.decodeColor(tortue.getCouleur()));
 		graph.fillPolygon(arrow);
-    }
+		
+	}
 }

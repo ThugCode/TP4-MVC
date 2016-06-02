@@ -4,34 +4,33 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import commun.Commun;
+import modele.Segment;
 import modele.Tortue;
 import modele.TortueAleatoire;
-import modele.TortueIntelligente;
 
 /**
  * @author GERLAND - LETOURNEUR
  */
-public abstract class TortueVue
+public class TortueVue
 {	
 	protected Tortue tortue;
+	private FormeVue forme;
 
-	public Tortue getTortue() {
-		return tortue;
-	}
-	
 	/**
 	 * Constructeur
 	 * @param p_tortue
 	 */
 	public TortueVue(Tortue p_tortue) {
 		tortue = p_tortue;
+		
+		forme = new FormeHexaVue();
 	}
 	
 	/**
 	 * Dessiner la tortue et ses segments
 	 * @param graph
 	 */
-	public void drawTurtle (Graphics graph) {
+	public void dessinerTortue (Graphics graph) {
 		
 		if (graph==null) {
 			System.out.println("Impossible de trouver le Graphics pour dessiner la tortue");
@@ -46,6 +45,14 @@ public abstract class TortueVue
 			graph.setColor(Color.yellow);
 			graph.fillArc(arcX, arcY, Commun.LONGUEUR_VUE, Commun.LONGUEUR_VUE, arcDirection, Commun.ANGLE_VUE);
 		}
+		
+		// Dessine les segments
+		for(Segment seg : tortue.getListSegments()) {
+			seg.drawSegment(graph);
+		}
+				
+		forme.dessinerTortue(graph, this.getTortue());
+		
 		/*
 		//Display point of the arc
 		if(tortue instanceof TortueIntelligente && ((TortueIntelligente)tortue).getChampVision() != null) {
@@ -56,5 +63,17 @@ public abstract class TortueVue
 			graph.fillRect(((TortueIntelligente)tortue).getChampVision().getD().x, ((TortueIntelligente)tortue).getChampVision().getD().y, 5, 5);
 		}
 		*/
+	}
+	
+	public Tortue getTortue() {
+		return tortue;
+	}
+	
+	public FormeVue getForme() {
+		return forme;
+	}
+
+	public void setForme(FormeVue forme) {
+		this.forme = forme;
 	}
 }
