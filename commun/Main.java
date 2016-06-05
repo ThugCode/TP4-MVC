@@ -8,6 +8,8 @@ import javax.swing.SwingUtilities;
 
 import controleur.LogoControleur;
 import modele.Logo;
+import vue.FormeHexaVue;
+import vue.FormeVue;
 import vue.LogoVue;
 
 public class Main {
@@ -43,6 +45,10 @@ public class Main {
 				logoControleur.setLogoVue(logoVue);				
 				
 				logoVue.setVisible(true);
+				
+				//Changement de forme
+				FormeVue fcv = new FormeHexaVue();
+				logoVue.getDessin().changerFormeTortues(fcv);
 			}
 		});
 	}

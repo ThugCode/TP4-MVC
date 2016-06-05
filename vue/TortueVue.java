@@ -20,10 +20,9 @@ public class TortueVue
 	 * Constructeur
 	 * @param p_tortue
 	 */
-	public TortueVue(Tortue p_tortue) {
+	public TortueVue(Tortue p_tortue, FormeVue p_forme) {
 		tortue = p_tortue;
-		
-		forme = new FormeHexaVue();
+		forme = p_forme;
 	}
 	
 	/**

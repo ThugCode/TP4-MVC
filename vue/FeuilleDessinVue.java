@@ -18,6 +18,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<TortueVue> tortues;
+	private FormeVue formeCourante;
 	private FeuilleDessin dessin;
 
 	/**
@@ -25,6 +26,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 */
 	public FeuilleDessinVue(FeuilleDessin dessin) {
 		tortues = new ArrayList<TortueVue>();
+		formeCourante = new FormeHexaVue();
 		this.dessin = dessin;
 		this.dessin.addObserver(this);
 	}
@@ -50,7 +52,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * @param o
 	 */
 	public void ajouterTortue(Tortue tortue) {
-		TortueVue tortueVue = new TortueVue(tortue);
+		TortueVue tortueVue = new TortueVue(tortue, formeCourante);
 		tortue.addObserver(this);
 		tortues.add(tortueVue);
 		dessin.ajouterTortue(tortue);
@@ -75,6 +77,17 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 		}
 	}
 	
+	/**
+	 * Changer la forme des tortues
+	 * @param forme
+	 */
+	public void changerFormeTortues(FormeVue forme) {
+		formeCourante = forme;
+		for(TortueVue tortueVue : tortues) {
+			tortueVue.setForme(forme);
+		}
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		this.repaint();
@@ -82,6 +95,5 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	
 	public ArrayList<TortueVue> getTortues() {
 		return tortues;
-	}	
-	
+	}
 }
