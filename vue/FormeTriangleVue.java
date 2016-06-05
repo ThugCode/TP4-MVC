@@ -40,7 +40,7 @@ public class FormeTriangleVue implements FormeVue
 		  (int) Math.round( p2.y+r*Math.sin(theta - alpha) ));
 
 		arrow.addPoint(p2.x,p2.y);
-		graph.setColor(tortue.decodeColor(tortue.getCouleur()));
+		graph.setColor(tortue.decoderCouleur(tortue.getCouleur()));
 		graph.fillPolygon(arrow);
 	}
 }

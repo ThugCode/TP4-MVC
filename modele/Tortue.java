@@ -75,7 +75,7 @@ public class Tortue extends Observable {
 	 * @param c
 	 * @return Color
 	 */
-	public Color decodeColor(int c) {
+	public Color decoderCouleur(int c) {
 		switch(c) {
 			case 0: return(Color.black);
 			case 1: return(Color.blue);
@@ -110,7 +110,7 @@ public class Tortue extends Observable {
 			seg.getPtStart().y = y;
 			seg.getPtEnd().x = newX;
 			seg.getPtEnd().y = newY;
-			seg.setColor(decodeColor(couleur));
+			seg.setColor(decoderCouleur(couleur));
 	
 			listeSegments.add(seg);
 		}

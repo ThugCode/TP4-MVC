@@ -15,7 +15,7 @@ public class FormeCercleVue implements FormeVue
 	public void dessinerTortue(Graphics graph, Tortue tortue) {
 		
 		Point p = new Point(tortue.getX(),tortue.getY());
-		graph.setColor(tortue.decodeColor(tortue.getCouleur()));
+		graph.setColor(tortue.decoderCouleur(tortue.getCouleur()));
 		graph.fillOval(p.x-5,p.y-5, 10, 10);
 	}
 }

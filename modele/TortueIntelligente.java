@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import commun.Commun;
 
@@ -17,9 +18,37 @@ public class TortueIntelligente extends TortueAleatoire {
 	/**
 	 * Avancer seul et en ayant un champ de vision
 	 */
-	public void avancerIntelligement() {
+	public void avancerIntelligement(ArrayList<Tortue> autresTortues) {
 		
-		this.avancerSeul();
+		ArrayList<Tortue> listeTortuesVisibles = new ArrayList<Tortue>();
+		
+		for (Tortue autreTortue : autresTortues) {
+			
+			if(this.equals(autreTortue)) continue;
+			
+			if(this.getChampVision().estDansLePolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
+				listeTortuesVisibles.add(autreTortue);
+			}
+		}
+		
+		//Prendre la direction et vitesse moyenne des tortues visibles
+		if(listeTortuesVisibles.size() > 0) {
+			int cpt = 0;
+			int directionAutre = 0;
+			int vitesseAutre = 0;
+			for(Tortue tortueASuivre : listeTortuesVisibles) {
+				cpt++;
+				directionAutre += tortueASuivre.getDirection();
+				vitesseAutre += tortueASuivre.getVitesse();
+			}
+			directionAutre /= cpt;
+			vitesseAutre /= cpt;
+			
+			this.setDirection(directionAutre);
+			this.setVitesse(vitesseAutre);
+		}
+		
+		this.avancer();
 		
 		this.deployerLeChampsDeVision();
 	}

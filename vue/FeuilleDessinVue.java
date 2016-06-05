@@ -72,7 +72,11 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * @param g
 	 */
 	public void showTurtles(Graphics g) {
-		for(TortueVue tortueVue : tortues) {
+		
+		//Copie de la liste pour éviter les erreurs de comodification
+		ArrayList<TortueVue> tortuesAffichages = new ArrayList<TortueVue>(tortues);
+		
+		for(TortueVue tortueVue : tortuesAffichages) {
 			tortueVue.dessinerTortue(g);
 		}
 	}

@@ -20,6 +20,7 @@ public class TortueAleatoire extends Tortue {
 
 	/**
 	 * Réinitialiser la tortue
+	 * et affecter une vitesse et une direction aléatoire 
 	 */
 	public void reset() {
 		
@@ -37,7 +38,7 @@ public class TortueAleatoire extends Tortue {
 	/**
 	 * Avancer la tortue grâce à sa vitesse
 	 */
-	public void avancerSeul() {
+	public void avancer() {
 		
 		this.avancer(this.vitesse);
 		

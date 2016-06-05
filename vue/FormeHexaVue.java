@@ -33,7 +33,7 @@ public class FormeHexaVue implements FormeVue
 			hexa.addPoint(b.x, b.y);
 		}
 
-		graph.setColor(tortue.decodeColor(tortue.getCouleur()));
+		graph.setColor(tortue.decoderCouleur(tortue.getCouleur()));
 		
 		graph.fillPolygon(hexa);
 		

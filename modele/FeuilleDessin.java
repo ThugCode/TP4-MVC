@@ -1,6 +1,5 @@
 package modele;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -49,7 +48,7 @@ public class FeuilleDessin extends Observable{
 	}
 	
 	/**
-	 * 
+	 * Réinitialiser la feuille de dessin
 	 */
 	public void reset() {
 		for (Tortue tortue : tortues) {
@@ -58,50 +57,20 @@ public class FeuilleDessin extends Observable{
 	}
 	
 	/**
-	 * 
+	 * Faire avancer toutes les tortues aléatoires
 	 */
-	public void faireAvancerTortues() {
+	public void faireAvancerTortuesAleatoires() {
 		for (Tortue tortue : tortues) {
-			((TortueAleatoire) tortue).avancerSeul();
+			((TortueAleatoire) tortue).avancer();
 		}
 	}
 	
 	/**
-	 * 
+	 * Faire avancer toutes les tortues intelligentes
 	 */
 	public void faireAvancerTortuesIntelligentes() {
-		
-		ArrayList<Tortue> listesTortue = new ArrayList<Tortue>();
 		for (Tortue tortue : tortues) {
-			
-			listesTortue.clear();
-			
-			for (Tortue autreTortue : tortues) {
-				
-				if(tortue.equals(autreTortue)) continue;
-				
-				if(((TortueIntelligente) tortue).getChampVision().estDansLePolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
-					listesTortue.add(autreTortue);
-				}
-			}
-			
-			if(listesTortue.size() > 0) {
-				int cpt = 0;
-				int directionAutre = 0;
-				int vitesseAutre = 0;
-				for(Tortue tortueASuivre : listesTortue) {
-					cpt++;
-					directionAutre += tortueASuivre.getDirection();
-					vitesseAutre += tortueASuivre.getVitesse();
-				}
-				directionAutre /= cpt;
-				vitesseAutre /= cpt;
-				
-				tortue.setDirection(directionAutre);
-				tortue.setVitesse(vitesseAutre);
-			}
-			
-			((TortueIntelligente) tortue).avancerIntelligement();
+			((TortueIntelligente) tortue).avancerIntelligement(tortues);
 		}
 	}
 	

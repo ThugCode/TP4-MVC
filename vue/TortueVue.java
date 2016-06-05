@@ -29,23 +29,23 @@ public class TortueVue
 	 * Dessiner la tortue et ses segments
 	 * @param graph
 	 */
-	public void dessinerTortue (Graphics graph) {
+	public void dessinerTortue(Graphics graph) {
 		
 		if (graph==null) {
 			System.out.println("Impossible de trouver le Graphics pour dessiner la tortue");
 			return;
 		}
 		
-		//Display arc angle vue
+		//Dessiner l'angle de vue
 		if(tortue instanceof TortueAleatoire) {
 			int arcDirection = 360 - tortue.getDirection() - Commun.ANGLE_VUE/2;
 			int arcX = tortue.getX()-Commun.LONGUEUR_VUE/2;
 			int arcY = tortue.getY()-Commun.LONGUEUR_VUE/2;
-			graph.setColor(Color.yellow);
+			graph.setColor(new Color(1f, 1f, 0f, 0.4f));
 			graph.fillArc(arcX, arcY, Commun.LONGUEUR_VUE, Commun.LONGUEUR_VUE, arcDirection, Commun.ANGLE_VUE);
 		}
 		
-		// Dessine les segments
+		//Dessiner les segments
 		for(Segment seg : tortue.getListSegments()) {
 			seg.drawSegment(graph);
 		}

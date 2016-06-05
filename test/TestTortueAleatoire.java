@@ -20,7 +20,7 @@ public class TestTortueAleatoire extends TestTortue {
 
 	@Test
 	public void testCoordooneesValides() {
-		tortue.avancerSeul();
+		tortue.avancer();
 		assertTrue(tortue.getX() > 0);
 		assertTrue(tortue.getX() < Commun.LARGEUR_FEUILLE);
 		assertTrue(tortue.getY() > 0);
