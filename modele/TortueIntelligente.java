@@ -2,6 +2,7 @@ package modele;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import commun.Commun;
 
@@ -9,12 +10,25 @@ public class TortueIntelligente extends TortueAleatoire {
 	
 	private Polygone champVision;
 
+	/**
+	 * Constructeur
+	 */
 	public TortueIntelligente() {
 		super();
 		
 		this.deployerLeChampsDeVision();
 	}
 	
+	/**
+	 * Calcul de la distance avec une autre tortue
+	 * @param autreTortue
+	 * @return
+	 */
+	public float distanceAutreTortue(Tortue autreTortue) {
+		
+		return (float) Math.sqrt(Math.pow(autreTortue.getX()-this.getX(), 2) + Math.pow(autreTortue.getY()-this.getY(),2));
+	}
+
 	/**
 	 * Avancer seul et en ayant un champ de vision
 	 */
@@ -23,13 +37,14 @@ public class TortueIntelligente extends TortueAleatoire {
 		ArrayList<Tortue> listeTortuesVisibles = new ArrayList<Tortue>();
 		
 		for (Tortue autreTortue : autresTortues) {
-			
-			if(this.equals(autreTortue)) continue;
-			
 			if(this.getChampVision().estDansLePolygone(new Point(autreTortue.getX(), autreTortue.getY()))) {
 				listeTortuesVisibles.add(autreTortue);
 			}
 		}
+		listeTortuesVisibles.add(this);
+		
+		float temp = 0;
+		float distancePlusProche = Float.MAX_VALUE;
 		
 		//Prendre la direction et vitesse moyenne des tortues visibles
 		if(listeTortuesVisibles.size() > 0) {
@@ -40,12 +55,31 @@ public class TortueIntelligente extends TortueAleatoire {
 				cpt++;
 				directionAutre += tortueASuivre.getDirection();
 				vitesseAutre += tortueASuivre.getVitesse();
+				
+				if(this.equals(tortueASuivre)) continue;
+				temp = this.distanceAutreTortue(tortueASuivre);
+				if(temp<distancePlusProche) {
+					distancePlusProche = temp;
+				}
 			}
 			directionAutre /= cpt;
 			vitesseAutre /= cpt;
 			
+			if(distancePlusProche < Commun.DISTANCE_MINIMUM) {
+				vitesseAutre = 0;
+			}
+			
 			this.setDirection(directionAutre);
 			this.setVitesse(vitesseAutre);
+		}
+		
+		//Si la tortue ne voit aucune autre tortue
+		if(listeTortuesVisibles.size() == 1) {
+			Random rand = new Random();
+			vitesse += rand.nextInt(5)-2;
+			if(vitesse > Commun.VITESSE_MAXIMUM) vitesse = Commun.VITESSE_MAXIMUM;
+			if(vitesse <= 0) vitesse = 1;
+			direction += rand.nextInt(10)-5;
 		}
 		
 		this.avancer();

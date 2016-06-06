@@ -2,6 +2,7 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import commun.Commun;
 import modele.Segment;
@@ -46,7 +47,8 @@ public class TortueVue
 		}
 		
 		//Dessiner les segments
-		for(Segment seg : tortue.getListSegments()) {
+		ArrayList<Segment> segments = new ArrayList<>(tortue.getListSegments()); //Checkforcomodification
+		for(Segment seg : segments) {
 			seg.drawSegment(graph);
 		}
 				

@@ -94,7 +94,7 @@ public class LogoVue extends JFrame implements Observer {
 			dessin.ajouterTortue(logo.getCTortue());
 		}	
 		else {
-			for(int i = 0; i<1; i++) {
+			for(int i = 0; i<20; i++) {
 				TortueIntelligente tortue = new TortueIntelligente();
 				dessin.ajouterTortue(tortue);
 			}
