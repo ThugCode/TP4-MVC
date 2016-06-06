@@ -116,12 +116,6 @@ public class LogoControleur implements ActionListener, WindowListener, KeyListen
 			
 			logoVue.getDessin().retirerDerniereTortue();
 			logo.getDessin().retirerDerniereTortue();
-		} 
-		else if (c.equals("Aléatoires")) {
-			
-		}
-		else if (c.equals("Contrôlable")) {
-			
 		}
 		else if (c.equals("Quitter")) {
 			System.exit(0);

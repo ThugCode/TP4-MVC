@@ -174,7 +174,7 @@ public class LogoVue extends JFrame implements Observer {
 	 */
 	public void menuInit() {
 		JMenuBar menubar = new JMenuBar();
-		JMenu menuFile = new JMenu("File");
+		JMenu menuFile = new JMenu("Fichier");
 		menubar.add(menuFile);
 		addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
 		addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
@@ -188,11 +188,6 @@ public class LogoVue extends JFrame implements Observer {
 			addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
 			addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
 		}
-		
-		JMenu menuCommandes = new JMenu("Mode");
-		menubar.add(menuCommandes);
-		addMenuItem(menuCommandes, "Aléatoires", "Aléatoires", -1);
-		addMenuItem(menuCommandes, "Contrôlable", "Contrôlable", -1);
 		
 		JMenu menuHelp=new JMenu("Aide");
 		menubar.add(menuHelp);
