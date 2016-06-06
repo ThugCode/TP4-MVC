@@ -55,7 +55,4 @@ public class TestTortue {
 		assertEquals(ancienX, tortue.getX());
 		assertEquals(ancienY - 10, tortue.getY());
 	}
-	
-	
-
 }

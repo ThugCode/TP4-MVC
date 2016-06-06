@@ -40,10 +40,10 @@ public class TortueVue
 		//Dessiner l'angle de vue
 		if(tortue instanceof TortueAleatoire) {
 			int arcDirection = 360 - tortue.getDirection() - Commun.ANGLE_VUE/2;
-			int arcX = tortue.getX()-Commun.LONGUEUR_VUE/2;
-			int arcY = tortue.getY()-Commun.LONGUEUR_VUE/2;
+			int arcX = tortue.getX()-Commun.LONGUEUR_VUE;
+			int arcY = tortue.getY()-Commun.LONGUEUR_VUE;
 			graph.setColor(new Color(1f, 1f, 0f, 0.4f));
-			graph.fillArc(arcX, arcY, Commun.LONGUEUR_VUE, Commun.LONGUEUR_VUE, arcDirection, Commun.ANGLE_VUE);
+			graph.fillArc(arcX, arcY, Commun.LONGUEUR_VUE*2, Commun.LONGUEUR_VUE*2, arcDirection, Commun.ANGLE_VUE);
 		}
 		
 		//Dessiner les segments

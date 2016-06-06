@@ -24,13 +24,23 @@ public class TestPolygone {
 	}
 
 	@Test
-	public void testEstDansLePolygone() {
-		assertTrue(polygone.estDansLePolygone(pointDedans));
+	public void testVerifieDroiteABTrue() {
+		assertTrue(polygone.verifierDroiteAB(this.pointDedans));
 	}
 	
 	@Test
-	public void testEstEnDehorsDuPolygone() {
-		assertFalse(polygone.estDansLePolygone(pointDehors));
+	public void testVerifieDroiteABFalse() {
+		assertFalse(polygone.verifierDroiteAB(this.pointDehors));
+	}
+	
+	@Test
+	public void testVerifieDroiteADTrue() {
+		assertTrue(polygone.verifierDroiteAD(this.pointDedans));
+	}
+	
+	@Test
+	public void testVerifieDroiteADFalse() {
+		assertFalse(polygone.verifierDroiteAD(this.pointDehors));
 	}
 
 }

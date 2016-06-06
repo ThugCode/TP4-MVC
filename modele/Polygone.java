@@ -49,20 +49,17 @@ public class Polygone {
 		
 		return false;
 	}
-	
-	/**
-	 * Verifie si le point x est dans le polygone
-	 * @param x
-	 * @return
-	 */
-	public boolean estDansLePolygone(Point x) {
-		
-		return verifierDroite(x, this.a, this.b, this.c) 
-			&& verifierDroite(x, this.b, this.c, this.d) 
-			&& verifierDroite(x, this.c, this.d, this.a)
-			&& verifierDroite(x, this.d, this.a, this.b);
-	}
 
+	public boolean verifierDroiteAB(Point test) {
+
+		return verifierDroite(test, this.getA(), this.getB(), this.getD());
+	}
+	
+	public boolean verifierDroiteAD(Point test) {
+
+		return verifierDroite(test, this.getA(), this.getD(), this.getB());
+	}
+	
 	/***************
 	 * GETTERS
 	 ***************/

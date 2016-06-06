@@ -8,7 +8,7 @@ public class Commun {
 	public static final int TAILLE_BASE = 5;
 	
 	public static final double RATIO_DEG_RAD = 0.0174533;
-	public static final int LONGUEUR_VUE = 140;
+	public static final int LONGUEUR_VUE = 70;
 	public static final int ANGLE_VUE = 90;
 	
 	public static final Dimension VGAP = new Dimension(1,5);
