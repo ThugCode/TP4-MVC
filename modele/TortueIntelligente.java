@@ -46,8 +46,12 @@ public class TortueIntelligente extends TortueAleatoire {
 	/**
 	 * Avancer seul et en ayant un champ de vision
 	 */
-	public void avancerIntelligement(ArrayList<Tortue> autresTortues) {
+	public void avancer(ArrayList<Tortue> autresTortues) {
 		
+		super.avancer(autresTortues);
+		
+		this.deployerLeChampsDeVision();
+			
 		ArrayList<Tortue> listeTortuesVisibles = new ArrayList<Tortue>();
 		
 		for (Tortue autreTortue : autresTortues) {
@@ -97,9 +101,7 @@ public class TortueIntelligente extends TortueAleatoire {
 			direction += rand.nextInt(10)-5;
 		}
 		
-		this.avancer();
 		
-		this.deployerLeChampsDeVision();
 	}
 	
 	/**

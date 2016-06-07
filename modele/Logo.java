@@ -7,26 +7,23 @@ import java.util.Observable;
  */
 public class Logo extends Observable {
 
-	private Tortue cTortue;
-	private FeuilleDessin dessin;
-	private boolean controle;
-	private boolean marche;
-	private int cCouleur;
+	private Tortue cTortue;			//Tortue contrôlable
+	private FeuilleDessin dessin;	//Feuille de dessin
+	private boolean marche;			//Tortues aléatoires en marche ?
+	private int cCouleur;			//Couleur courante
 	
+	/**
+	 * Constructeur
+	 */
 	public Logo() {
-		this(true);
-	}
-	
-	public Logo(boolean p_controle) {
 		dessin = new FeuilleDessin();
 		cTortue = new Tortue();
-		controle = p_controle;
-		setMarche(false);
+		marche = false;
 		cCouleur = 0;
 	}
 	
 	/**
-	 * Lancer un thread qui toutes les 100ms fait bouger les tortues
+	 * Lancer un thread qui, toutes les 100ms, fait bouger les tortues
 	 */
 	public void lancerLesTortues() {
 		
@@ -38,7 +35,7 @@ public class Logo extends Observable {
 		Thread t2 = new Thread(new Runnable() {
 			public void run() {
 				while(marche) {
-					dessin.faireAvancerTortuesIntelligentes();
+					dessin.faireAvancerTortuesAutonomes();
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
@@ -59,18 +56,12 @@ public class Logo extends Observable {
 	public Tortue getCTortue() { return cTortue; }
 
 	public int getcCouleur() { return cCouleur; }
-
-	public boolean isControle() { return controle; }
 	
 	public boolean isMarche() { return marche; }
 	
 	/************
 	 * SETTER
 	 ************/
-	
-	public void setControle(boolean controle) {
-		this.controle = controle;
-	}
 	
 	public void setDessin(FeuilleDessin dessin) {
 		this.dessin = dessin;

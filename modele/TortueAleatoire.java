@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import commun.Commun;
@@ -7,7 +8,7 @@ import commun.Commun;
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class TortueAleatoire extends Tortue {
+public class TortueAleatoire extends Tortue implements TortueAutonome {
 
 	protected int vitesse;
 
@@ -38,7 +39,7 @@ public class TortueAleatoire extends Tortue {
 	/**
 	 * Avancer la tortue grâce à sa vitesse
 	 */
-	public void avancer() {
+	public void avancer(ArrayList<Tortue> autresTortues) {
 		
 		this.avancer(this.vitesse);
 		

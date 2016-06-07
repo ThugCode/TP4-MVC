@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Event;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
@@ -22,25 +21,22 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import commun.Commun;
 import controleur.LogoControleur;
 import modele.Logo;
-import modele.TortueIntelligente;
 
 /**
  * @author GERLAND - LETOURNEUR
  */
-public class LogoVue extends JFrame implements Observer {
+public abstract class LogoVue extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	
-	private Logo logo;
-	private LogoControleur controleur;
-	private FeuilleDessinVue dessin;
-	private JTextField inputValue;
+	protected Logo logo;
+	protected LogoControleur controleur;
+	protected FeuilleDessinVue dessin;
 
 	/**
 	 * Controleur
@@ -53,7 +49,6 @@ public class LogoVue extends JFrame implements Observer {
 		
 		controleur = p_logoControleur;
 		this.addWindowListener(controleur);
-		this.addKeyListener(controleur);
 		this.addComponentListener(controleur);
 		
 		logo = p_logo;
@@ -80,47 +75,11 @@ public class LogoVue extends JFrame implements Observer {
 		
 		menuInit();
 		
-		if(logo.isControle())
-			procInit();
-		
 		//FEUILLE
 		dessin.setBackground(Color.red);
 		dessin.setSize(new Dimension(Commun.LARGEUR_FEUILLE, Commun.HAUTEUR_FEUILLE));
 		dessin.setPreferredSize(new Dimension(Commun.LARGEUR_FEUILLE, Commun.HAUTEUR_FEUILLE));
 		getContentPane().add(dessin,"Center");
-		
-		//TORTUE
-		if(logo.isControle()) {
-			dessin.ajouterTortue(logo.getCTortue());
-		}	
-		else {
-			for(int i = 0; i<20; i++) {
-				TortueIntelligente tortue = new TortueIntelligente();
-				dessin.ajouterTortue(tortue);
-			}
-		}
-	}
-
-	/**
-	 * Initialisation de la toolbar
-	 */
-	public void procInit() {
-		
-		JPanel p2 = new JPanel(new GridLayout());
-		
-		JButton b20 = new JButton("Proc1");
-		b20.addActionListener(controleur);
-		p2.add(b20);
-		
-		JButton b21 = new JButton("Proc2");
-		b21.addActionListener(controleur);
-		p2.add(b21);
-		
-		JButton b22 = new JButton("Proc3");
-		b22.addActionListener(controleur);
-		p2.add(b22);
-
-		getContentPane().add(p2,"South");
 	}
 	
 	/**
@@ -130,27 +89,9 @@ public class LogoVue extends JFrame implements Observer {
 		
 		JToolBar toolBar = new JToolBar();
 		
-		if(logo.isControle()) {
-			inputValue = new JTextField("45",5);
-			toolBar.add(inputValue);
-			
-			toolBar.add(Box.createRigidArea(Commun.HGAP));
-		} else {
-			addButton(toolBar, "Lancer", "Lancer", null);
-			addButton(toolBar, "Stopper", "Stopper", null);
-			addButton(toolBar, "Ajouter", "Ajouter", null);
-			addButton(toolBar, "Supprimer", "Supprimer", null);
-		}
+		boutonsGauche(toolBar);
 		
 		addButton(toolBar,"Effacer","Nouveau dessin","/icons/index.png");
-		
-		if(logo.isControle()) {
-			addButton(toolBar, "Avancer", "Avancer", null);
-			addButton(toolBar, "Droite", "Droite", null);
-			addButton(toolBar, "Gauche", "Gauche", null);
-			addButton(toolBar, "Lever", "Lever Crayon", null);
-			addButton(toolBar, "Baisser", "Baisser Crayon", null);
-		}
 		
 		// Create the combo box
 		String[] colorStrings = {"noir", "bleu", "cyan","gris fonce","rouge", "vert", "gris clair",
@@ -170,6 +111,18 @@ public class LogoVue extends JFrame implements Observer {
 	}
 	
 	/**
+	 * Ajouter des JButtons dans la JToolBar
+	 * @param toolBar
+	 */
+	public abstract void boutonsGauche(JToolBar toolBar);
+	
+	/**
+	 * Ajouter des JMenuItem dans le JMenu
+	 * @param toolBar
+	 */
+	public abstract void menuOption(JMenuBar menubar);
+
+	/**
 	 * Initialisation du menu
 	 */
 	public void menuInit() {
@@ -179,15 +132,7 @@ public class LogoVue extends JFrame implements Observer {
 		addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
 		addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
 		
-		if(logo.isControle()) {
-			JMenu menuCommandes = new JMenu("Commandes");
-			menubar.add(menuCommandes);
-			addMenuItem(menuCommandes, "Avancer", "Avancer", -1);
-			addMenuItem(menuCommandes, "Droite", "Droite", -1);
-			addMenuItem(menuCommandes, "Gauche", "Gauche", -1);
-			addMenuItem(menuCommandes, "Lever Crayon", "Lever", -1);
-			addMenuItem(menuCommandes, "Baisser Crayon", "Baisser", -1);
-		}
+		menuOption(menubar);
 		
 		JMenu menuHelp=new JMenu("Aide");
 		menubar.add(menuHelp);
@@ -195,15 +140,6 @@ public class LogoVue extends JFrame implements Observer {
 		addMenuItem(menuHelp, "A propos", "About", -1);
 		
 		setJMenuBar(menubar);
-	}
-	
-	/**
-	 * Getter sur la valeur du champs input
-	 * @return String
-	 */
-	public String getInputValue(){
-		String s = inputValue.getText();
-		return(s);
 	}
 	
 	/**

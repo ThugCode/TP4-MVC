@@ -37,7 +37,7 @@ public class TestFeuilleDessin {
 		int ancienX = this.tortue.getX();
 		int ancienY = this.tortue.getY();
 		
-		this.dessin.faireAvancerTortuesAleatoires();
+		this.dessin.faireAvancerTortuesAutonomes();
 		
 		assertTrue(ancienX != this.tortue.getX());
 		assertTrue(ancienY != this.tortue.getY());

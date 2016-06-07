@@ -6,12 +6,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import controleur.LogoAutonomeControleur;
+import controleur.LogoControlableControleur;
 import controleur.LogoControleur;
 import modele.Logo;
 import vue.FormeHexaVue;
 import vue.FormeVue;
+import vue.LogoAutonomeVue;
+import vue.LogoControlableVue;
 import vue.LogoVue;
 
+/**
+ * @author GERLAND - LETOURNEUR
+ */
 public class Main {
 
 	public static void main(String[] args) {
@@ -34,19 +41,21 @@ public class Main {
 			    if(rang == -1)
 			    	System.exit(0);
 			    
-			    boolean controle = true;
-			    if(rang == 1)
-			    	controle = false;
-			    
-				Logo logo = new Logo(controle);
-				LogoControleur logoControleur = new LogoControleur(logo);
-				LogoVue logoVue = new LogoVue(logo, logoControleur);
-				
-				logoControleur.setLogoVue(logoVue);				
-				
+			    //Instanciation de l'application
+				Logo logo = new Logo();
+				LogoControleur logoControleur;
+				LogoVue logoVue;
+				if(rang == 1) {
+					logoControleur = new LogoAutonomeControleur(logo);
+					logoVue = new LogoAutonomeVue(logo, logoControleur);
+				} else {
+					logoControleur = new LogoControlableControleur(logo);
+					logoVue = new LogoControlableVue(logo, (LogoControlableControleur) logoControleur);
+				}
+				logoControleur.setLogoVue(logoVue);
 				logoVue.setVisible(true);
 				
-				//Changement de forme
+				//Changement de forme facilement
 				FormeVue fcv = new FormeHexaVue();
 				logoVue.getDessin().changerFormeTortues(fcv);
 			}

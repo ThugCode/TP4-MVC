@@ -7,25 +7,11 @@ public class FeuilleDessin extends Observable{
 
 	private ArrayList<Tortue> tortues;
 
+	/**
+	 * Constructeur
+	 */
 	public FeuilleDessin() {
 		tortues = new ArrayList<Tortue>();
-	}
-	
-	/**
-	 * Notifier la vue
-	 */
-	private void notifier() {
-		setChanged();
-		notifyObservers();
-	}
-	
-	/**
-	 * Changer la couleur de toutes les tortues
-	 */
-	public void changerCouleursTortues(int couleur) {
-		for (Tortue tortue : tortues) {
-			tortue.setCouleur(couleur);
-		}
 	}
 	
 	/**
@@ -38,10 +24,18 @@ public class FeuilleDessin extends Observable{
 	}
 	
 	/**
+	 * Changer la couleur de toutes les tortues
+	 */
+	public void changerCouleursTortues(int couleur) {
+		for (Tortue tortue : tortues) {
+			tortue.setCouleur(couleur);
+		}
+	}
+	
+	/**
 	 * Supprimer la dernière tortue de la liste
 	 */
 	public void retirerDerniereTortue() {
-		
 		if(tortues.size() > 0)
 			tortues.remove(tortues.size()-1);
 		notifier();
@@ -57,27 +51,27 @@ public class FeuilleDessin extends Observable{
 	}
 	
 	/**
-	 * Faire avancer toutes les tortues aléatoires
+	 * Faire avancer toutes les tortues autonomes
 	 */
-	public void faireAvancerTortuesAleatoires() {
+	public void faireAvancerTortuesAutonomes() {
 		for (Tortue tortue : tortues) {
-			((TortueAleatoire) tortue).avancer();
+			((TortueAutonome) tortue).avancer(tortues);
 		}
 	}
 	
 	/**
-	 * Faire avancer toutes les tortues intelligentes
+	 * Notifier la vue
 	 */
-	public void faireAvancerTortuesIntelligentes() {
-		for (Tortue tortue : tortues) {
-			((TortueIntelligente) tortue).avancerIntelligement(tortues);
-		}
+	private void notifier() {
+		setChanged();
+		notifyObservers();
 	}
 	
-	public ArrayList<Tortue> getTortues() {
-		return tortues;
-	}
-
+	/**
+	 * GETTER - SETTER
+	 */
+	public ArrayList<Tortue> getTortues() { return tortues; }
+	
 	public void setTortues(ArrayList<Tortue> tortues) {
 		this.tortues = tortues;
 	}
