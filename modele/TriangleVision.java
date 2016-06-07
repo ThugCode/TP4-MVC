@@ -2,22 +2,26 @@ package modele;
 
 import java.awt.Point;
 
-public class Polygone {
+public class TriangleVision {
 	
 	private Point a; //Centre de la tortue
 	private Point b; //Haut gauche
-	private Point c; //Haut centre
-	private Point d; //Haut droit
+	private Point c; //Haut droit
 	
-	public Polygone(Point w, Point x, Point y, Point z) {
+	/**
+	 * Constructeur
+	 * @param w
+	 * @param x
+	 * @param y
+	 */
+	public TriangleVision(Point w, Point x, Point y) {
 		this.a = w;
 		this.b = x;
 		this.c = y;
-		this.d = z;
 	}
 	
 	/**
-	 * Vérifie si le point "test" est du même côté que le point "witness"
+	 * Vérifie si le point "test" est du même côté que le point "temoin"
 	 * en coupant en deux le plan avec la droite coupant les points P-S
 	 * @param test
 	 * @param P
@@ -50,14 +54,24 @@ public class Polygone {
 		return false;
 	}
 
+	/**
+	 * Vérifier la droite AB
+	 * @param test
+	 * @return
+	 */
 	public boolean verifierDroiteAB(Point test) {
 
-		return verifierDroite(test, this.getA(), this.getB(), this.getD());
+		return verifierDroite(test, this.getA(), this.getB(), this.getC());
 	}
 	
+	/**
+	 * Vérifier la droite AC
+	 * @param test
+	 * @return
+	 */
 	public boolean verifierDroiteAD(Point test) {
 
-		return verifierDroite(test, this.getA(), this.getD(), this.getB());
+		return verifierDroite(test, this.getA(), this.getC(), this.getB());
 	}
 	
 	/***************
@@ -67,8 +81,6 @@ public class Polygone {
 	public Point getA() { return a; }
 
 	public Point getB() { return b; }
-	
-	public Point getC() { return c; }
 
-	public Point getD() { return d;	}
+	public Point getC() { return c;	}
 }

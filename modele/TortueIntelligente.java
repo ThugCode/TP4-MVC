@@ -8,7 +8,7 @@ import commun.Commun;
 
 public class TortueIntelligente extends TortueAleatoire {
 	
-	private Polygone champVision;
+	private TriangleVision champVision;
 
 	/**
 	 * Constructeur
@@ -38,9 +38,9 @@ public class TortueIntelligente extends TortueAleatoire {
 		
 		Point t = new Point(autreTortue.getX(), autreTortue.getY());
 		
-		return this.getChampVision().verifierDroiteAB(t) 
-				&& this.getChampVision().verifierDroiteAD(t)
-				&& distanceAutreTortue(autreTortue) <= Commun.LONGUEUR_VUE;
+		return this.getChampVision().verifierDroiteAB(t)					//Verifie la droite AB
+				&& this.getChampVision().verifierDroiteAD(t)				//Vérifie la droite AC
+				&& distanceAutreTortue(autreTortue) <= Commun.LONGUEUR_VUE;	//Vérifie l'arc de cercle BC
 	}
 
 	/**
@@ -48,10 +48,6 @@ public class TortueIntelligente extends TortueAleatoire {
 	 */
 	public void avancer(ArrayList<Tortue> autresTortues) {
 		
-		super.avancer(autresTortues);
-		
-		this.deployerLeChampsDeVision();
-			
 		ArrayList<Tortue> listeTortuesVisibles = new ArrayList<Tortue>();
 		
 		for (Tortue autreTortue : autresTortues) {
@@ -84,6 +80,8 @@ public class TortueIntelligente extends TortueAleatoire {
 			directionAutre /= cpt;
 			vitesseAutre /= cpt;
 			
+			//Si la distance d'une autre tortue est trop faible,
+			//La tortue s'arrete
 			if(distancePlusProche < Commun.DISTANCE_MINIMUM) {
 				vitesseAutre = 0;
 			}
@@ -93,6 +91,7 @@ public class TortueIntelligente extends TortueAleatoire {
 		}
 		
 		//Si la tortue ne voit aucune autre tortue
+		//elle peut faire varier légerement sa vitesse et sa direction
 		if(listeTortuesVisibles.size() == 1) {
 			Random rand = new Random();
 			vitesse += rand.nextInt(5)-2;
@@ -101,7 +100,9 @@ public class TortueIntelligente extends TortueAleatoire {
 			direction += rand.nextInt(10)-5;
 		}
 		
+		super.avancer(autresTortues);
 		
+		this.deployerLeChampsDeVision();
 	}
 	
 	/**
@@ -116,30 +117,25 @@ public class TortueIntelligente extends TortueAleatoire {
 		int bY = (int) (this.getY() + Commun.LONGUEUR_VUE*Math.sin(Commun.RATIO_DEG_RAD*(this.getDirection()-Commun.ANGLE_VUE/2)));
 		Point b = new Point(bX, bY);
 		
-		//Coordonnée du point haut centre
-		int cX = (int) Math.round(x+Commun.LONGUEUR_VUE*Math.cos(Commun.RATIO_DEG_RAD*direction));
-		int cY = (int) Math.round(y+Commun.LONGUEUR_VUE*Math.sin(Commun.RATIO_DEG_RAD*direction));
+		//Coordonnée du point haut droite
+		int cX = (int) (this.getX() + Commun.LONGUEUR_VUE*Math.cos(Commun.RATIO_DEG_RAD*(this.getDirection()+Commun.ANGLE_VUE/2)));
+		int cY = (int) (this.getY() + Commun.LONGUEUR_VUE*Math.sin(Commun.RATIO_DEG_RAD*(this.getDirection()+Commun.ANGLE_VUE/2)));
 		Point c = new Point(cX, cY);
 		
-		//Coordonnée du point haut droite
-		int dX = (int) (this.getX() + Commun.LONGUEUR_VUE*Math.cos(Commun.RATIO_DEG_RAD*(this.getDirection()+Commun.ANGLE_VUE/2)));
-		int dY = (int) (this.getY() + Commun.LONGUEUR_VUE*Math.sin(Commun.RATIO_DEG_RAD*(this.getDirection()+Commun.ANGLE_VUE/2)));
-		Point d = new Point(dX, dY);
-		
-		champVision = new Polygone(a, b, c, d);
+		champVision = new TriangleVision(a, b, c);
 	}
 
 	/************
 	 * GETTER
 	 ************/
 	
-	public Polygone getChampVision() { return champVision; }
+	public TriangleVision getChampVision() { return champVision; }
 	
 	/************
 	 * SETTER
 	 ************/
 
-	public void setChampVision(Polygone champVision) {
+	public void setChampVision(TriangleVision champVision) {
 		this.champVision = champVision;
 	}
 }

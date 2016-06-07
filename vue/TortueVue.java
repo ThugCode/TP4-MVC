@@ -48,7 +48,8 @@ public class TortueVue
 		
 		//Dessiner les segments
 		SegmentVue vueSeg = null;
-		ArrayList<Segment> segments = new ArrayList<>(tortue.getListSegments()); //Checkforcomodification
+		//Copie de la liste pour éviter les erreurs "check for comodification"
+		ArrayList<Segment> segments = new ArrayList<>(tortue.getListSegments());
 		for(Segment seg : segments) {
 			vueSeg = new SegmentVue(seg);
 			vueSeg.drawSegment(graph);

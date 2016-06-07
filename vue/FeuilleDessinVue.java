@@ -44,7 +44,7 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 		g.fillRect(0,0,dim.width, dim.height);
 		g.setColor(c);
 
-		showTurtles(g);
+		dessinerTortues(g);
 	}
 	
 	/**
@@ -71,9 +71,9 @@ public class FeuilleDessinVue extends JPanel implements Observer {
 	 * Appel de chaque tortue pour l'afficher
 	 * @param g
 	 */
-	public void showTurtles(Graphics g) {
+	private void dessinerTortues(Graphics g) {
 		
-		//Copie de la liste pour éviter les erreurs de comodification
+		//Copie de la liste pour éviter les erreurs "check for comodification"
 		ArrayList<TortueVue> tortuesAffichages = new ArrayList<TortueVue>(tortues);
 		
 		for(TortueVue tortueVue : tortuesAffichages) {
