@@ -1,4 +1,4 @@
-package controleur;
+package src.controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +9,9 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JComboBox;
 
-import commun.Commun;
-import modele.Logo;
-import vue.LogoVue;
+import src.commun.Commun;
+import src.modele.Logo;
+import src.vue.LogoVue;
 
 /**
  * @author GERLAND - LETOURNEUR

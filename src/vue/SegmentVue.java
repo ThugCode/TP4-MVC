@@ -1,8 +1,8 @@
-package vue;
+package src.vue;
 
 import java.awt.Graphics;
 
-import modele.Segment;
+import src.modele.Segment;
 
 public class SegmentVue {
 

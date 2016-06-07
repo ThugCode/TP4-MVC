@@ -7,7 +7,7 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 
-import modele.TriangleVision;
+import src.modele.TriangleVision;
 
 public class TestTriangleVision {
 	

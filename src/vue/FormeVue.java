@@ -1,8 +1,8 @@
-package vue;
+package src.vue;
 
 import java.awt.Graphics;
 
-import modele.Tortue;
+import src.modele.Tortue;
 
 public interface FormeVue {
 	

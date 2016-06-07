@@ -1,4 +1,4 @@
-package vue;
+package src.vue;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,7 +9,7 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import modele.*;
+import src.modele.*;
 
 /**
  * @author GERLAND - LETOURNEUR

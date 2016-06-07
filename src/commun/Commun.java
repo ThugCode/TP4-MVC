@@ -1,4 +1,4 @@
-package commun;
+package src.commun;
 
 import java.awt.Dimension;
 

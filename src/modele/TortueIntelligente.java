@@ -1,10 +1,10 @@
-package modele;
+package src.modele;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-import commun.Commun;
+import src.commun.Commun;
 
 public class TortueIntelligente extends TortueAleatoire {
 	

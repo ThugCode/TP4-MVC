@@ -1,11 +1,11 @@
-package vue;
+package src.vue;
 
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
 
-import commun.Commun;
-import modele.Tortue;
+import src.commun.Commun;
+import src.modele.Tortue;
 
 /**
  * @author GERLAND - LETOURNEUR

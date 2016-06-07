@@ -1,9 +1,9 @@
-package controleur;
+package src.controleur;
 
 import java.awt.event.ActionEvent;
 
-import modele.Logo;
-import modele.TortueIntelligente;
+import src.modele.Logo;
+import src.modele.TortueIntelligente;
 
 /**
  * @author GERLAND - LETOURNEUR

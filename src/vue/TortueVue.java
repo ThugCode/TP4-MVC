@@ -1,13 +1,13 @@
-package vue;
+package src.vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import commun.Commun;
-import modele.Segment;
-import modele.Tortue;
-import modele.TortueAleatoire;
+import src.commun.Commun;
+import src.modele.Segment;
+import src.modele.Tortue;
+import src.modele.TortueAleatoire;
 
 /**
  * @author GERLAND - LETOURNEUR

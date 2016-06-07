@@ -1,11 +1,11 @@
-package vue;
+package src.vue;
 
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 
-import controleur.LogoControleur;
-import modele.Logo;
-import modele.TortueIntelligente;
+import src.controleur.LogoControleur;
+import src.modele.Logo;
+import src.modele.TortueIntelligente;
 
 /**
  * @author GERLAND - LETOURNEUR

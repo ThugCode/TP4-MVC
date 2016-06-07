@@ -1,4 +1,4 @@
-package vue;
+package src.vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,9 +24,9 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
-import commun.Commun;
-import controleur.LogoControleur;
-import modele.Logo;
+import src.commun.Commun;
+import src.controleur.LogoControleur;
+import src.modele.Logo;
 
 /**
  * @author GERLAND - LETOURNEUR

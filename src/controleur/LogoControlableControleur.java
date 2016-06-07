@@ -1,11 +1,11 @@
-package controleur;
+package src.controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import modele.Logo;
-import vue.LogoControlableVue;
+import src.modele.Logo;
+import src.vue.LogoControlableVue;
 
 /**
  * @author GERLAND - LETOURNEUR

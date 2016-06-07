@@ -1,4 +1,4 @@
-package modele;
+package src.modele;
 
 import java.awt.Color;
 import java.awt.Point;

@@ -1,9 +1,9 @@
-package modele;
+package src.modele;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import commun.Commun;
+import src.commun.Commun;
 
 /**
  * @author GERLAND - LETOURNEUR

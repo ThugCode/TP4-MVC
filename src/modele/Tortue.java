@@ -1,11 +1,11 @@
-package modele;
+package src.modele;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import commun.Commun;
+import src.commun.Commun;
 
 /**
  * @author GERLAND - LETOURNEUR

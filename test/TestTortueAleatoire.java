@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import commun.Commun;
-import modele.TortueAleatoire;
+import src.commun.Commun;
+import src.modele.TortueAleatoire;
 
 public class TestTortueAleatoire extends TestTortue {
 	

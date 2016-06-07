@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import modele.TortueIntelligente;
+import src.modele.TortueIntelligente;
 
 public class TestTortueIntelligente extends TestTortueAleatoire{
 

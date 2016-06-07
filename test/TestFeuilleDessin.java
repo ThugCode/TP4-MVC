@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import modele.FeuilleDessin;
-import modele.Tortue;
-import modele.TortueAleatoire;
+import src.modele.FeuilleDessin;
+import src.modele.Tortue;
+import src.modele.TortueAleatoire;
 
 public class TestFeuilleDessin {
 	

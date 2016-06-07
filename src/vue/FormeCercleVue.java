@@ -1,9 +1,9 @@
-package vue;
+package src.vue;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
-import modele.Tortue;
+import src.modele.Tortue;
 
 /**
  * @author GERLAND - LETOURNEUR

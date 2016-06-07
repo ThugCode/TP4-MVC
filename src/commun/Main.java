@@ -1,4 +1,4 @@
-package commun;
+package src.commun;
 
 import java.io.File;
 
@@ -6,15 +6,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import controleur.LogoAutonomeControleur;
-import controleur.LogoControlableControleur;
-import controleur.LogoControleur;
-import modele.Logo;
-import vue.FormeHexaVue;
-import vue.FormeVue;
-import vue.LogoAutonomeVue;
-import vue.LogoControlableVue;
-import vue.LogoVue;
+import src.controleur.LogoAutonomeControleur;
+import src.controleur.LogoControlableControleur;
+import src.controleur.LogoControleur;
+import src.modele.Logo;
+import src.vue.FormeHexaVue;
+import src.vue.FormeVue;
+import src.vue.LogoAutonomeVue;
+import src.vue.LogoControlableVue;
+import src.vue.LogoVue;
 
 /**
  * @author GERLAND - LETOURNEUR

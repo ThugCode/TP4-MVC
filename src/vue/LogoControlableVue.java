@@ -1,4 +1,4 @@
-package vue;
+package src.vue;
 
 import java.awt.GridLayout;
 
@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-import commun.Commun;
-import controleur.LogoControlableControleur;
-import modele.Logo;
+import src.commun.Commun;
+import src.controleur.LogoControlableControleur;
+import src.modele.Logo;
 
 /**
  * @author GERLAND - LETOURNEUR
