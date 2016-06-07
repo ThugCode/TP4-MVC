@@ -26,7 +26,7 @@ public class Main {
 			public void run() {
 
 				String filePath = new File("").getAbsolutePath();
-				filePath += "/ressources/tortue.png";
+				filePath += "/src/ressources/tortue.png";
 				
 				String[] boutons = {"Tortue controlable", "Tortues intelligentes"};
 			    int rang = JOptionPane.showOptionDialog(null, 
